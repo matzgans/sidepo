@@ -2,15 +2,18 @@
     <div>
 
         <section class="bg-white dark:bg-gray-900">
-            <div class="mx-auto flex max-w-7xl justify-between py-10 pt-24">
+            <div class="mx-auto flex max-w-7xl flex-wrap justify-between py-10 pt-24">
 
-                <div class="w-1/2">
+                <div class="mb-10 w-full lg:mb-0 lg:w-1/2">
                     <h1
-                        class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
-                        SIDEPO</h1>
+                        class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
+                        SIDEPO
+                    </h1>
                     <p>Sistem informasi depo yang terintegrasi dengan baik dapat memberikan keuntungan yang signifikan
-                        bagi perusahaan. Dengan otomatisasi dan pengelolaan data yang efisien, sistem ini mampu
-                        meningkatkan efektivitas operasional, meningkatkan transparansi, dan mengoptimalkan keuntungan.
+                        bagi perusahaan.
+                        Dengan otomatisasi dan pengelolaan data yang efisien, sistem ini mampu meningkatkan efektivitas
+                        operasional,
+                        meningkatkan transparansi, dan mengoptimalkan keuntungan.
                     </p>
                     <div class="flex flex-col space-y-4 py-5 sm:flex-row sm:space-y-0">
                         <a class="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-3 text-center text-base font-medium text-white hover:bg-primary focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
@@ -28,11 +31,13 @@
                         </a>
                     </div>
                 </div>
-                <div class="w-1/2">
-                    <img class="w-full" src="{{ asset('landing/images/logoprimary.png') }}" alt="">
+
+                <div class="w-full lg:w-1/2">
+                    <img class="w-full" src="{{ asset('landing/images/logoprimary.png') }}" alt="Logo Primary">
                 </div>
             </div>
         </section>
+
 
 
         <section class="bg-white dark:bg-gray-900">

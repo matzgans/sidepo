@@ -1,8 +1,9 @@
 <nav class="border-gray-200 bg-primary dark:bg-primary">
     <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
-        <a class="flex items-center space-x-3 rtl:space-x-reverse" href="https://flowbite.com/">
-            <h1 class="text-3xl font-extrabold text-white">SIDEPO</h1>
+        <a class="bg-cover bg-center" href="https://flowbite.com/">
+            <img class="h-auto w-20" src="{{ asset('logo/sidepo.png') }}" alt="">
         </a>
+
         <button
             class="dark:hover:bg-primary-dark dark:focus:ring-primary-dark inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-white md:hidden"
             data-collapse-toggle="navbar-default" type="button" aria-controls="navbar-default" aria-expanded="false">
