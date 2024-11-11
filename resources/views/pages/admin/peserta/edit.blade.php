@@ -4,7 +4,7 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="mb-2 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="flex items-center justify-between p-6">
-                    <div class="text-lg font-bold text-primary_hover">Tambah Data Peserta</div>
+                    <div class="text-lg font-bold text-primary_hover">Edit Data Peserta</div>
                     <div class=""><a href="{{ route('admin.pesertas.index') }}"><svg
                                 class="h-6 w-16 font-extrabold text-red-800 dark:text-white" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -29,8 +29,9 @@
                         <span class="font-medium">Berhasil Tambah Data</span> {{ session('message') }}
                     </div>
                 @endif
-                <form class="mx-auto max-w-full" action="{{ route('admin.pesertas.store') }}" method="POST"
-                    enctype="multipart/form-data">
+                <form class="mx-auto max-w-full" action="{{ route('admin.pesertas.update', $peserta->id) }}"
+                    method="POST" enctype="multipart/form-data">
+                    @method('PUT')
                     @csrf
                     <div class="grid grid-cols-4 gap-4">
                         <div class="col-span-3">
@@ -40,15 +41,16 @@
                                         for="name">Nama</label>
                                     <input
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="name" name="name" type="text" placeholder="Megipa...."
-                                        required />
+                                        id="name" name="name" type="text" value="{{ $peserta->name }}"
+                                        placeholder="Megipa...." required />
                                 </div>
                                 <div class="mb-3">
                                     <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                                         for="nik">NIK</label>
                                     <input
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="nik" name="nik" type="number" placeholder="75040" required />
+                                        id="nik" name="nik" type="number" value="{{ $peserta->nik }}"
+                                        placeholder="75040" required />
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-3">
@@ -57,7 +59,8 @@
                                         for="birth">Tanggal Lahir</label>
                                     <input
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="birth" name="birth" type="date" required />
+                                        id="birth" name="birth" type="date" value="{{ $peserta->birth }}"
+                                        required />
                                 </div>
                                 <div class="mb-3">
                                     <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
@@ -66,8 +69,12 @@
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                                         id="gender" name="gender" required>
                                         <option selected>Pilih Jenis Kelamin</option>
-                                        <option value="Laki - Laki">Laki - Laki</option>
-                                        <option value="Perempuan">Perempuan</option>
+                                        <option value="Laki - Laki"
+                                            {{ $peserta->gender == 'Laki - Laki' ? 'selected' : '' }}>Laki - Laki
+                                        </option>
+                                        <option value="Perempuan"
+                                            {{ $peserta->gender == 'Perempuan' ? 'selected' : '' }}>Perempuan
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -77,14 +84,15 @@
                                         for="phone">Nomor Telephone</label>
                                     <input
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="phone" name="phone" type="text" required />
+                                        id="phone" name="phone" type="text" value="{{ $peserta->phone }}"
+                                        required />
                                 </div>
                                 <div class="mb-3">
                                     <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                                         for="message">Alamat</label>
                                     <textarea
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="message" name="address" rows="4" placeholder="Jl. Kasmat Lahay nomor 9"></textarea>
+                                        id="message" name="address" rows="4" placeholder="Jl. Kasmat Lahay nomor 9">{{ $peserta->address }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +102,7 @@
                             class="rounded-lg border border-gray-200 bg-white p-3 shadow dark:border-gray-700 dark:bg-gray-800">
                             <div class="flex items-center justify-center p-5">
                                 <img class="h-32 w-32 object-cover" id="imagePreview"
-                                    src="{{ asset('photo/defaultprofile.jpg') }}" alt="" />
+                                    src="{{ asset('profilephoto/' . $peserta->photo) }}" alt="" />
                             </div>
                             <div class="mt-3">
 

@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('pesertas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('nip');
+            $table->string('nik');
             $table->string("birth");
             $table->string("phone");
             $table->string('photo')->nullable();
             $table->string('gender');
+            $table->string('address');
             $table->timestamps();
         });
     }
