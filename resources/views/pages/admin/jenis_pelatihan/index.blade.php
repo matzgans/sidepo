@@ -40,6 +40,9 @@
                                 <th class="px-6 py-3" scope="col">
                                     Tanggal Selesai
                                 </th>
+                                <th class="px-6 py-3" scope="col">
+                                    Aksi
+                                </th>
                             </tr>
                         </thead>
                         <tbody>

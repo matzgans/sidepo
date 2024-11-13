@@ -15,8 +15,8 @@ class PelatihanController extends Controller
      */
     public function index(Request $request)
     {
-
-        $query = Peserta::with('pelatihans'); // Eager load pelatihans
+        $query = Peserta::with('pelatihans')
+            ->has('pelatihans'); // Hanya tampilkan data yang memiliki relasi pelatihans
 
         // Memeriksa apakah ada query pencarian
         if ($request->has('search') && $request->search) {
@@ -89,14 +89,31 @@ class PelatihanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pelatihan = Pelatihan::where('peserta_id', $id)->get();
+        foreach ($pelatihan as $item) {
+            $item->delete();
+        }
+        return redirect()->back()->with('success', "Data Jenis Pelatihan Berhasil Menghapus Semua data Pelatihan");
     }
     public function update_status(string $update_status)
     {
         $pelatihan = Pelatihan::where('id', $update_status)->first();
-        $pelatihan->update([
-            'is_status' => 3,
-        ]);
+        if ($pelatihan->is_status == 3) {
+            $pelatihan->update([
+                'is_status' => 1,
+            ]);
+        } else {
+
+            $pelatihan->update([
+                'is_status' => 3,
+            ]);
+        }
+        return redirect()->back()->with('success', "Data Jenis Pelatihan Berhasil menyelesaikan pelatihan");
+    }
+    public function delete_status(string $delete_status)
+    {
+        $pelatihan = Pelatihan::where('id', $delete_status)->first();
+        $pelatihan->delete();
         return redirect()->back()->with('success', "Data Jenis Pelatihan Berhasil menyelesaikan pelatihan");
     }
 }

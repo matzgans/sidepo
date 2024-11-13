@@ -14,4 +14,5 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('jenis_pelatihan', JenisPelatihanController::class)->except('show');
     Route::resource('pelatihan', PelatihanController::class)->except('show');
     Route::get("pelatihan/update_status/{update_status}", [PelatihanController::class, 'update_status'])->name('pelatihan.update_status');
+    Route::get("pelatihan/delete_status/{delete_status}", [PelatihanController::class, 'delete_status'])->name('pelatihan.delete_status');
 });

@@ -34,6 +34,9 @@
                                 <th class="px-6 py-3" scope="col">
                                     Jenis Pelatihan Yang di Ambil
                                 </th>
+                                <th class="px-6 py-3" scope="col">
+                                    Aksi
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,9 +77,9 @@
                                             </ol>
                                         </td>
 
-                                        {{-- <td class="px-6 py-4">
+                                        <td class="px-6 py-4">
                                             <div class="flex justify-around">
-                                                <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                                                {{-- <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                                     href="{{ route('admin.jenis_pelatihan.edit', ['jenis_pelatihan' => $jenis_pelatihan->id]) }}"><svg
                                                         class="h-6 w-6 text-yellow-400 dark:text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -86,13 +89,12 @@
                                                             stroke-linejoin="round" stroke-width="2"
                                                             d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                                     </svg>
-                                                </a>
+                                                </a> --}}
                                                 <button
                                                     class="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                                     data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                                    data-name="{{ $jenis_pelatihan->name }}"
-                                                    data-id="{{ $jenis_pelatihan->id }}" type="button"
-                                                    onclick="deleteData(this)"><svg
+                                                    data-name="{{ $peserta->name }}" data-id="{{ $peserta->id }}"
+                                                    type="button" onclick="deleteData(this)"><svg
                                                         class="h-6 w-6 text-red-800 dark:text-white" aria-hidden="true"
                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         fill="none" viewBox="0 0 24 24">
@@ -104,7 +106,7 @@
                                                 </button>
                                             </div>
 
-                                        </td> --}}
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else
@@ -124,14 +126,16 @@
                 <div class="grid w-full grid-cols-1 items-center">
                     <div>
                         <span>Hapus Pelatihan ini</span>
-
-                        <svg class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                            viewBox="0 0 24 24">
-                            <path fill-rule="evenodd"
-                                d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"
-                                clip-rule="evenodd" />
-                        </svg>
+                        <a id="link_delete"
+                            href="{{ route('admin.pelatihan.delete_status', ['delete_status' => 'id']) }}">
+                            <svg class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
                     </div>
                     <div>
                         <span class="">Tandai Telah Menyelesaikan Pelatihan</span>
@@ -163,21 +167,20 @@
                         data-modal-hide="popup-modal" type="button">
                         <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
                         <span class="sr-only">Close modal</span>
                     </button>
                     <div class="p-4 text-center md:p-5">
                         <svg class="mx-auto mb-4 h-12 w-12 text-gray-400 dark:text-gray-200" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Kamu Akan Menghapus Data
                         </h3>
-                        <form id="delete-form"
-                            action="{{ route('admin.jenis_pelatihan.destroy', ['jenis_pelatihan' => 'id']) }}"
+                        <form id="delete-form" action="{{ route('admin.pelatihan.destroy', ['pelatihan' => 'id']) }}"
                             method="POST">
                             @csrf
                             @method('DELETE')
@@ -207,16 +210,22 @@
                 const modalContent = document.getElementById('modalContent');
                 const modalTitle = document.getElementById('modalTitle');
                 const linkUpdate = document.getElementById('link_update');
+                const linkDelete = document.getElementById('link_delete');
 
                 // Hapus href lama terlebih dahulu
                 linkUpdate.removeAttribute('href');
+                linkDelete.removeAttribute('href');
 
                 // Ganti href dengan itemId yang sesuai
                 const newHref = "{{ route('admin.pelatihan.update_status', ['update_status' => '__ID__']) }}".replace('__ID__',
                     itemId);
+                const newHrefDelete = "{{ route('admin.pelatihan.delete_status', ['delete_status' => '__ID__']) }}".replace(
+                    '__ID__',
+                    itemId);
 
                 // Set href baru pada link
                 linkUpdate.setAttribute('href', newHref);
+                linkDelete.setAttribute('href', newHrefDelete)
 
                 // Log URL untuk debugging
                 console.log("Updated URL:", newHref); // Cek apakah URL sudah berubah sesuai dengan itemId
