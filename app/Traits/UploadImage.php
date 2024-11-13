@@ -8,7 +8,7 @@ trait UploadImage
     {
         $imageName = null;
         if ($file) {
-            $imageName = $file->getClientOriginalName();
+            $imageName = str_replace([' ', '-'], '_', $file->getClientOriginalName());
             $file->move(public_path($path), $imageName);
         }
         return $imageName;

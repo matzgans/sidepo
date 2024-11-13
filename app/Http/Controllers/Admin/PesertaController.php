@@ -144,15 +144,17 @@ class PesertaController extends Controller
      */
     public function destroy(Peserta $peserta)
     {
-        // Cari peserta berdasarkan ID
 
-        // Cek apakah ada gambar yang terkait dengan peserta
-        if ($peserta->photo && Storage::exists('public/profilephoto/' . $peserta->photo)) {
-            // Jika ada, hapus gambar dari folder penyimpanan
-            Storage::delete('public/profilephoto/' . $peserta->photo);
+        // if ($peserta->photo && file_exists(public_path('profilephoto/' . $peserta->photo))) {
+        //     Jika ada, hapus gambar dari folder penyimpanan
+        //     Storage::delete('public/profilephoto/' . $peserta->photo);
+        //     unlink(public_path() . '/profilephoto/' .  $peserta->photo);
+        // }
+
+        if ($peserta->photo && file_exists(public_path('profilephoto/' . $peserta->photo))) {
+            unlink(public_path('profilephoto/' . $peserta->photo)); // Menghapus gambar lama
         }
 
-        // Hapus data peserta dari database
         $peserta->delete();
 
         // Redirect dengan pesan sukses

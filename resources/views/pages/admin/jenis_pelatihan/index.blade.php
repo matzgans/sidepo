@@ -4,7 +4,7 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="mb-2 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="flex items-center justify-between p-6">
-                    <div class="text-lg font-bold text-primary_hover">Data Peserta</div>
+                    <div class="text-lg font-bold text-primary_hover">Data Jenis Pelatihan</div>
                     <div class=""><a href="{{ route('dashboard') }}"><svg
                                 class="h-6 w-16 font-extrabold text-red-800 dark:text-white" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -16,9 +16,10 @@
             </div>
             <div class="overflow-hidden bg-white p-6 shadow-sm sm:rounded-lg">
                 <div class="mb-3 flex items-center justify-between">
-                    <x-search fromAction="{{ route('admin.pesertas.index') }}" placeholder="Cari Nama / Nik"></x-search>
+                    <x-search fromAction="{{ route('admin.jenis_pelatihan.index') }}"
+                        placeholder="Cari Jenis Pelatihan..."></x-search>
 
-                    <x-addfeature link="{{ route('admin.pesertas.create') }}"></x-addfeature>
+                    <x-addfeature link="{{ route('admin.jenis_pelatihan.create') }}"></x-addfeature>
                 </div>
                 <div class="relative overflow-x-auto shadow-md shadow-primary sm:rounded-lg">
                     <table class="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
@@ -28,66 +29,44 @@
                                     NO
                                 </th>
                                 <th class="px-6 py-3" scope="col">
-                                    Name
+                                    Nama Pelatihan
                                 </th>
                                 <th class="px-6 py-3" scope="col">
-                                    NIK
+                                    Deskripsi
                                 </th>
                                 <th class="px-6 py-3" scope="col">
-                                    Photo
+                                    Tanggal Mulai
                                 </th>
                                 <th class="px-6 py-3" scope="col">
-                                    Tanggal Lahir
-                                </th>
-                                <th class="px-6 py-3" scope="col">
-                                    Nomor Telephone
-                                </th>
-                                <th class="px-6 py-3" scope="col">
-                                    Jenis Kelamin
-                                </th>
-                                <th class="px-6 py-3" scope="col">
-                                    Alamat
-                                </th>
-                                <th class="px-6 py-3" scope="col">
-                                    Action
+                                    Tanggal Selesai
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($pesertas)
-                                @foreach ($pesertas as $peserta)
+                            @if ($jenis_pelatihans)
+                                @foreach ($jenis_pelatihans as $jenis_pelatihan)
                                     <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                                         <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                                             scope="row">
-                                            {{ ($pesertas->currentPage() - 1) * $pesertas->perPage() + $loop->iteration }}
+                                            {{ ($jenis_pelatihans->currentPage() - 1) * $jenis_pelatihans->perPage() + $loop->iteration }}
                                         </th>
                                         <td class="px-6 py-4">
-                                            {{ $peserta->name }}
+                                            {{ $jenis_pelatihan->title }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $peserta->nik }}
+                                            {{ $jenis_pelatihan->desc }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            <img class="h-20 w-20 rounded-full bg-cover bg-center"
-                                                src="{{ asset('profilephoto/' . $peserta->photo) }}" srcset=""
-                                                alt="">
+                                            {{ \Carbon\Carbon::parse($jenis_pelatihan->pelatihan_start)->locale('id')->isoFormat('dddd D MMMM YYYY') }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ \Carbon\Carbon::parse($peserta->birth)->locale('id')->isoFormat('dddd D MMMM YYYY') }}
+                                            {{ \Carbon\Carbon::parse($jenis_pelatihan->pelatihan_end)->locale('id')->isoFormat('dddd D MMMM YYYY') }}
                                         </td>
-                                        <td class="px-6 py-4">
-                                            {{ $peserta->phone }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ $peserta->gender }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ $peserta->address }}
-                                        </td>
+
                                         <td class="px-6 py-4">
                                             <div class="flex justify-around">
                                                 <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                                                    href="{{ route('admin.pesertas.edit', ['peserta' => $peserta->id]) }}"><svg
+                                                    href="{{ route('admin.jenis_pelatihan.edit', ['jenis_pelatihan' => $jenis_pelatihan->id]) }}"><svg
                                                         class="h-6 w-6 text-yellow-400 dark:text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" fill="none"
@@ -100,8 +79,9 @@
                                                 <button
                                                     class="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                                     data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                                    data-name="{{ $peserta->name }}" data-id="{{ $peserta->id }}"
-                                                    type="button" onclick="deleteData(this)"><svg
+                                                    data-name="{{ $jenis_pelatihan->name }}"
+                                                    data-id="{{ $jenis_pelatihan->id }}" type="button"
+                                                    onclick="deleteData(this)"><svg
                                                         class="h-6 w-6 text-red-800 dark:text-white" aria-hidden="true"
                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         fill="none" viewBox="0 0 24 24">
@@ -121,7 +101,7 @@
                             @endif
                         </tbody>
                     </table>
-                    {{ $pesertas->links() }}
+                    {{ $jenis_pelatihans->links() }}
                 </div>
 
             </div>
@@ -135,8 +115,8 @@
                         data-modal-hide="popup-modal" type="button">
                         <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
                         <span class="sr-only">Close modal</span>
                     </button>
@@ -148,7 +128,8 @@
                         </svg>
                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Kamu Akan Menghapus Data
                         </h3>
-                        <form id="delete-form" action="{{ route('admin.pesertas.destroy', ['peserta' => 'id']) }}"
+                        <form id="delete-form"
+                            action="{{ route('admin.jenis_pelatihan.destroy', ['jenis_pelatihan' => 'id']) }}"
                             method="POST">
                             @csrf
                             @method('DELETE')
@@ -157,7 +138,7 @@
                         <button
                             class="inline-flex items-center rounded-lg bg-red-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800"
                             id="confirm-delete-button" data-modal-hide="popup-modal" type="button">
-                            Yes, I'm sure
+                            Yes, Hapus data
                         </button>
                         <button
                             class="ms-3 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"

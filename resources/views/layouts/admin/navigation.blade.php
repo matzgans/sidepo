@@ -41,8 +41,19 @@
                                     {{ __('Peserta') }}
                                 </x-dropdown-link>
                             </li>
+                            <li>
+                                <x-dropdown-link :href="route('admin.jenis_pelatihan.index')" :active="request()->routeIs('admin.jenis_pelatihan.*')">
+                                    {{ __('Jenis Pelatihan') }}
+                                </x-dropdown-link>
+                            </li>
                         </ul>
                     </div>
+                </li>
+                <li>
+                    <x-nav-link :href="route('admin.pelatihan.index')" :active="request()->routeIs('admin.pelatihan.*')">
+                        {{ __('Pelatihan') }}
+                    </x-nav-link>
+
                 </li>
             </ul>
         </div>
