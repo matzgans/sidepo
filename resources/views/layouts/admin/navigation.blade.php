@@ -1,5 +1,5 @@
 <nav class="border-gray-200 bg-primary dark:border-gray-700 dark:bg-gray-900">
-    <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
+    <div class="mx-auto flex max-w-screen-2xl flex-wrap items-center justify-between p-4">
         <div>
             <h3 class="text-3xl font-bold text-white">SIDEPO</h3>
         </div>
@@ -18,7 +18,7 @@
                 class="mt-4 flex flex-col rounded-lg border border-gray-100 bg-primary p-4 font-medium rtl:space-x-reverse dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-primary md:p-0 md:dark:bg-gray-900">
                 <!-- Dashboard Link -->
                 <li>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </li>

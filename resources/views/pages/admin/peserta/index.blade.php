@@ -67,10 +67,10 @@
                                         <td class="px-6 py-4">
                                             {{ $peserta->nik }}
                                         </td>
-                                        <td class="px-6 py-4">
-                                            <img class="h-20 w-20 rounded-full bg-cover bg-center"
-                                                src="{{ asset('profilephoto/' . $peserta->photo) }}" srcset=""
-                                                alt="">
+                                        <td class="py-4">
+                                            <img class="h-20 w-20 rounded-full"
+                                                src="{{ asset('profilephoto/' . $peserta->photo) }}"
+                                                alt="Rounded avatar">
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ \Carbon\Carbon::parse($peserta->birth)->locale('id')->isoFormat('dddd D MMMM YYYY') }}
@@ -121,6 +121,9 @@
                             @endif
                         </tbody>
                     </table>
+                </div>
+                <div class="mt-3">
+
                     {{ $pesertas->links() }}
                 </div>
 

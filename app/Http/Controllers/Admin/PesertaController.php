@@ -26,7 +26,7 @@ class PesertaController extends Controller
                 ->orWhere('nik', 'LIKE', "%{$searchTerm}%"); // Add more columns if needed
         }
 
-        $pesertas = $query->paginate(5)->appends(['search' => $request->search]);
+        $pesertas = $query->paginate(3)->appends(['search' => $request->search]);
         return view("pages.admin.peserta.index", compact('pesertas'));
     }
 

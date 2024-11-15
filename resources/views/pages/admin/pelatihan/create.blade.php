@@ -54,7 +54,6 @@
                                         <select
                                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                                             name="jenis_pelatihan_id[]" required>
-                                            <option selected>Pilih Jenis Pelatihan</option>
                                             @foreach ($jenis_pelatihans as $jenis_pelatihan)
                                                 <option value="{{ $jenis_pelatihan->id }}">{{ $jenis_pelatihan->title }}
                                                 </option>
@@ -67,6 +66,7 @@
                                         class="ms-auto mt-2 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700"
                                         id="tambahJenisPelatihanButton" type="button">Tambah Jenis Pelatihan +
                                     </button>
+
                                 </div>
                             </div>
                         </div>

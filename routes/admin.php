@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JenisPelatihanController;
 use App\Http\Controllers\Admin\PelatihanController;
 use App\Http\Controllers\Admin\PesertaController;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource('pesertas', PesertaController::class)->except('show');
     Route::resource('jenis_pelatihan', JenisPelatihanController::class)->except('show');
     Route::resource('jenis_pelatihan', JenisPelatihanController::class)->except('show');
