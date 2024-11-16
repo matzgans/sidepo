@@ -60,6 +60,11 @@
                         {{ __('Pelatihan') }}
                     </x-nav-link>
                 </li>
+                <li>
+                    <x-nav-link :href="route('admin.article.index')" :active="request()->routeIs('admin.article.*')">
+                        {{ __('Artikel') }}
+                    </x-nav-link>
+                </li>
                 <!-- User Avatar and Dropdown -->
                 <div class="relative md:flex md:items-center md:space-x-4">
                     <button
