@@ -30,7 +30,7 @@ class PelatihanController extends Controller
             });
         }
 
-        $pesertas = $query->paginate(5)->appends(['search' => $request->search]);
+        $pesertas = $query->paginate(3)->appends(['search' => $request->search]);
 
         return view("pages.admin.pelatihan.index", compact('pesertas'));
     }

@@ -14,9 +14,11 @@
     <!-- Swiper CSS -->
     <link href="https://unpkg.com/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" rel="stylesheet" />
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+
 </head>
 
 <body class="bg-gray-50 text-gray-800">
@@ -39,8 +41,9 @@
 
     <!-- JavaScript for Navbar Toggle -->
     @stack('before-scripts')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
     @stack('after-scripts')
 </body>
 

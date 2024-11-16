@@ -48,7 +48,7 @@
                         data-modal-toggle="default-modal" type="button">
                         <div class="transform rounded-lg bg-white p-6 shadow-lg transition hover:scale-105">
                             <h3 class="mb-2 text-2xl font-bold text-primary">{{ ucfirst($jenis_pelatihan->title) }}</h3>
-                            <p>{{ ucfirst($jenis_pelatihan->desc) }}</p>
+                            <p class="line-clamp-1">{{ ucfirst($jenis_pelatihan->desc) }}</p>
                         </div>
                     </button>
                 @endforeach
@@ -141,6 +141,20 @@
     </div>
     @push('after-scripts')
         <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const swiper = new Swiper('.mySwiper', {
+                    loop: true, // Mengaktifkan loop
+                    autoplay: {
+                        delay: 3000, // Waktu delay otomatis
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                });
+            });
+
             // Menunggu sampai halaman selesai dimuat
             document.addEventListener('DOMContentLoaded', function() {
                 // Menangkap semua tombol dengan class 'training-button'

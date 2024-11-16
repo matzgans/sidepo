@@ -5,7 +5,7 @@
             <div class="mb-2 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="flex items-center justify-between p-6">
                     <div class="text-lg font-bold text-primary_hover">Data Peserta</div>
-                    <div class=""><a href="{{ route('dashboard') }}"><svg
+                    <div class=""><a href="{{ route('admin.dashboard') }}"><svg
                                 class="h-6 w-16 font-extrabold text-red-800 dark:text-white" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

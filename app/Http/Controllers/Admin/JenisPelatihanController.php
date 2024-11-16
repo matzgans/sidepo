@@ -21,7 +21,7 @@ class JenisPelatihanController extends Controller
             $query->where('title', 'LIKE', "%{$searchTerm}%");
         }
 
-        $jenis_pelatihans = $query->paginate(5)->appends(['search' => $request->search]);
+        $jenis_pelatihans = $query->paginate(3)->appends(['search' => $request->search]);
         return view("pages.admin.jenis_pelatihan.index", compact('jenis_pelatihans'));
     }
 
@@ -41,7 +41,7 @@ class JenisPelatihanController extends Controller
         // Validasi input
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255|min:6|unique:jenis_pelatihans',
-            'desc' => 'required|string|max:255|min:6',
+            'desc' => 'required|string|max:500|min:6',
             'pelatihan_start' => 'required|date',
             'pelatihan_end' => 'required|date',
 
