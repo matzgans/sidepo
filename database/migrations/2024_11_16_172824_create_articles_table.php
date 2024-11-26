@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid()->unique();
             $table->string("author");
             $table->string("title");
-            $table->string("content");
+            $table->text("content");
             $table->string("thumbnail");
             $table->boolean("is_status")->default(0);
             $table->timestamps();
