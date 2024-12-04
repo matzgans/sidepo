@@ -2,7 +2,7 @@
     <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
         <a class="flex items-center space-x-3 rtl:space-x-reverse" href="#">
             <img class="h-8" src="{{ asset('logo/sidepo.png') }}" alt="Flowbite Logo" />
-            <span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">SIDEPO</span>
+            <span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">siDAPOG </span>
         </a>
         <button
             class="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"

@@ -6,7 +6,7 @@
                 <div class="flex items-center justify-between p-6">
                     <div class="text-lg font-bold text-primary_hover">Tambah Data Artikel</div>
                     <div class=""><a href="{{ route('admin.article.index') }}"><svg
-                                class="h-6 w-16 font-extrabold text-red-800 dark:text-white" aria-hidden="true"
+                                class="h-10 w-10 font-extrabold text-red-800 dark:text-white" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4" />

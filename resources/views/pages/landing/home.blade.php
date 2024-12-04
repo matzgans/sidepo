@@ -7,11 +7,11 @@
             <div class="swiper mySwiper h-full">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide h-full bg-cover bg-center"
-                        style="background-image: url('{{ asset('landing/images/csimage1.jpg') }}');"></div>
+                        style="background-image: url('{{ asset('landing/images/logo potensi.jpg') }}');"></div>
                     <div class="swiper-slide h-full bg-cover bg-center"
-                        style="background-image: url('{{ asset('landing/images/csimage2.jpg') }}');"></div>
+                        style="background-image: url('{{ asset('landing/images/kol.jpg') }}');"></div>
                     <div class="swiper-slide h-full bg-cover bg-center"
-                        style="background-image: url('{{ asset('landing/images/csimage3.jpg') }}');"></div>
+                        style="background-image: url('{{ asset('landing/images/fotbar.jpg') }}');"></div>
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -19,10 +19,10 @@
             <!-- Text and Button Overlay -->
             <div
                 class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-50 px-4 text-white">
-                <h1 class="mb-4 text-4xl font-bold md:text-6xl">SIDEPO</h1>
-                <p class="mb-8 text-lg md:text-2xl">Prepare Your Skills & Helped You Family</p>
+                <h1 class="mb-4 text-4xl font-bold md:text-6xl">SISTEM INFORMASI DATA POTENSI KANTOR PENCARIAN DAN PERTOLONGAN GORONTALO</h1>
+                <p class="mb-8 text-lg md:text-2xl">Avignam Jagat Samagram</p>
                 <a class="rounded-full bg-white px-8 py-3 font-semibold text-primary transition hover:bg-gray-200"
-                    href="{{ route('login') }}">Get Started</a>
+                    href="{{ route('login') }}">Login</a> 
             </div>
         </div>
     </section>
@@ -31,16 +31,15 @@
     <!-- About Section -->
     <section class="bg-white px-8 py-16 text-gray-800" id="about">
         <div class="container mx-auto text-center">
-            <h2 class="mb-4 text-3xl font-bold">Tentang Sidepo</h2>
-            <p class="mx-auto max-w-2xl text-lg">Kami Berkomitmen Untuk menghasilkan pemuda dan pemudi yang siap akan
-                terjadinya bencana dengan memberikan mereka skill yang mumpuni</p>
+            <h2 class="mb-4 text-3xl font-bold">Tentang siDAPOG</h2>
+            <p class="mx-auto max-w-2xl text-lg">Sistem informasi data potensi khusus Kantor Pencarian dan Pertolongan Provinsi Gorontalo berfungsi untuk mengumpulkan, mengelola data terkait sumber daya potensi yang ada, guna meningkatkan efektivitas dalam penanganan situasi darurat antarinstansi dalam upaya pencarian dan pertolongan di wilayah Gorontalo.</p>
         </div>
     </section>
 
     <!-- Services Section -->
     <section class="bg-gray-100 px-8 py-16" id="pelatihan">
         <div class="container mx-auto text-center">
-            <h2 class="mb-8 text-3xl font-bold">Pelatihan</h2>
+            <h2 class="mb-8 text-3xl font-bold">Jenis Pelatihan Potensi</h2>
             <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
                 @foreach ($jenis_pelatihans as $jenis_pelatihan)
                     <button class="training-button" data-title="{{ json_encode($jenis_pelatihan) }}"
@@ -58,7 +57,7 @@
     </section>
     <section class="bg-white px-8 py-16" id="peserta">
         <div class="container mx-auto text-center">
-            <h2 class="mb-8 text-3xl font-bold">Peserta</h2>
+            <h2 class="mb-8 text-3xl font-bold">Peserta Pelatihan Potensi</h2>
             <div class="mx-5 bg-white p-5 shadow-lg">
 
 
@@ -156,7 +155,7 @@
     <!-- Contact Section -->
     <section class="bg-gray-100 px-8 py-16 text-gray-900" id="article">
         <div class="container mx-auto text-center">
-            <h2 class="mb-8 text-3xl font-bold">Article</h2>
+            <h2 class="mb-8 text-3xl font-bold">Artikel</h2>
             <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                 @foreach ($articles as $article)
                     <div
@@ -193,18 +192,21 @@
         </div>
     </section>
     <section class="bg-white px-8 py-16 text-gray-900" id="contact">
-        <div class="container mx-auto text-center">
-            <h2 class="mb-8 text-3xl font-bold">Contact Us</h2>
-            <form class="mx-auto max-w-lg space-y-4">
-                <input class="w-full rounded-lg px-4 py-2 text-gray-800" type="text" placeholder="Your Name">
-                <input class="w-full rounded-lg px-4 py-2 text-gray-800" type="email" placeholder="Your Email">
-                <textarea class="h-32 w-full rounded-lg px-4 py-2 text-gray-800" placeholder="Your Message"></textarea>
-                <button
-                    class="mb-2 me-2 h-11 w-full rounded-lg bg-green-700 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                    type="button">Submit</button>
-            </form>
+        <div class="container mx-auto text-left">
+            <h2 class="mb-8 text-3xl font-bold">Hubungi Kami</h2>
+            <p class="mb-2 flex"><svg class="w-6 mr-2 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M7.978 4a2.553 2.553 0 0 0-1.926.877C4.233 6.7 3.699 8.751 4.153 10.814c.44 1.995 1.778 3.893 3.456 5.572 1.68 1.679 3.577 3.018 5.57 3.459 2.062.456 4.115-.073 5.94-1.885a2.556 2.556 0 0 0 .001-3.861l-1.21-1.21a2.689 2.689 0 0 0-3.802 0l-.617.618a.806.806 0 0 1-1.14 0l-1.854-1.855a.807.807 0 0 1 0-1.14l.618-.62a2.692 2.692 0 0 0 0-3.803l-1.21-1.211A2.555 2.555 0 0 0 7.978 4Z"/>
+              </svg>
+              0811 4317 748</p>
+            <p class="flex items-center">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z" clip-rule="evenodd"/>
+                </svg>
+                JL Pangeran Hidayat II, Pulubala, Kec. Kota Tengah, Kota Gorontalo, Gorontalo 96127
+            </p>
         </div>
     </section>
+        </section>
 
 
 
@@ -323,10 +325,10 @@
                     <button
                         class="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         data-modal-hide="default-modal" type="button">I accept</button>
-                    <button
+                    {{-- <button
                         class="ms-3 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
                         data-modal-hide="default-modal" type="button">Decline</button>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

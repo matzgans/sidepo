@@ -1,7 +1,7 @@
 <nav class="border-gray-200 bg-primary dark:border-gray-700 dark:bg-gray-900">
     <div class="mx-auto flex max-w-screen-2xl flex-wrap items-center justify-between p-4">
         <div>
-            <h3 class="text-3xl font-bold text-white">SIDEPO</h3>
+            <h3 class="text-3xl font-bold text-white">siDAPOG</h3>
         </div>
         <button
             class="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"

@@ -24,7 +24,7 @@
 
                         </div>
                         <div>
-                            <h4 class="text-nowrap text-lg font-semibold">Peserta</h4>
+                            <h4 class="text-nowrap text-lg font-semibold">Peserta Potensi</h4>
                             <p class="text-3xl font-bold text-yellow-600">{{ $count_pesertas }}</p>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
 
                         </div>
                         <div>
-                            <h4 class="text-nowrap text-lg font-semibold">Jumlah Pelatihan</h4>
+                            <h4 class="text-nowrap text-lg font-semibold">Jumlah Pelatihan Potensi</h4>
                             <p class="text-3xl font-bold text-yellow-600">{{ $count_jenis_pelatihans }}</p>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
 
                         </div>
                         <div>
-                            <h4 class="text-nowrap text-lg font-semibold">Telah Pelatihan</h4>
+                            <h4 class="text-nowrap text-lg font-semibold">Yang Telah Meyelesaikan Pelatihan</h4>
                             <p class="text-3xl font-bold text-yellow-600">{{ $count_telah_pelatihans }}</p>
                         </div>
                     </div>
