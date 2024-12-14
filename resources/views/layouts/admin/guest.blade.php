@@ -18,7 +18,7 @@
 
 <body class="font-sans text-gray-900 antialiased">
     <div class="flex min-h-screen justify-between">
-        <div class="flex w-full items-center bg-primary">
+        <div class="flex w-full items-center bg-slate-100">
             <a href="/">
                 <x-application-logo class="h-20 w-20 fill-current text-gray-500" />
             </a>

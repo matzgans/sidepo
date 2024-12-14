@@ -17,8 +17,8 @@
             <div class="overflow-hidden bg-white p-6 shadow-sm sm:rounded-lg">
                 <div class="mb-3 flex items-center justify-between">
                     <x-search fromAction="{{ route('admin.pelatihan.index') }}"
-                        placeholder="Cari  Pelatihan..."></x-search>
-
+                        placeholder="Cari Nama Peserta"></x-search>
+                    
                     <x-addfeature link="{{ route('admin.pelatihan.create') }}"></x-addfeature>
                 </div>
                 <div class="relative overflow-x-auto shadow-md shadow-primary sm:rounded-lg">

@@ -37,7 +37,7 @@
                                     Photo
                                 </th>
                                 <th class="px-6 py-3" scope="col">
-                                    Tanggal Lahir
+                                    Umur
                                 </th>
                                 <th class="px-6 py-3" scope="col">
                                     Nomor Telephone
@@ -73,7 +73,7 @@
                                                 alt="Rounded avatar">
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ \Carbon\Carbon::parse($peserta->birth)->locale('id')->isoFormat('dddd D MMMM YYYY') }}
+                                            {{ __(':age tahun', ['age' => \Carbon\Carbon::parse($peserta->birth)->diff(\Carbon\Carbon::now())->y]) }}
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $peserta->phone }}

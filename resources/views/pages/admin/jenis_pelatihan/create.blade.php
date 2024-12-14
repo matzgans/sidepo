@@ -40,7 +40,7 @@
                                         for="title">Nama Pelatihan</label>
                                     <input
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="title" name="title" type="text" placeholder="Tanggap Bencana ..."
+                                        id="title" name="title" type="text" placeholder="masukkan jenis pelatihan "
                                         required />
                                 </div>
                                 <div class="mb-3">
@@ -48,7 +48,7 @@
                                         for="desc">Deskipsi Pelatihan</label>
                                     <textarea
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="desc" name="desc" rows="4" placeholder="Pelatihan ini adalah ...."></textarea>
+                                        id="desc" name="desc" rows="4" placeholder="Penjelasan menggenai pelatihan "></textarea>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-3">

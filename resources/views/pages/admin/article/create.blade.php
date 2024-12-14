@@ -40,7 +40,7 @@
                                         for="author">Author</label>
                                     <input
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="author" name="author" type="text" placeholder="Megipa...."
+                                        id="author" name="author" type="text" placeholder="Masukan Nama Penulis"
                                         required />
                                 </div>
                                 <div class="mb-3">
@@ -48,7 +48,7 @@
                                         for="title">Judul</label>
                                     <input
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="title" name="title" type="text" placeholder="Judul Article...."
+                                        id="title" name="title" type="text" placeholder="Masukkan judul Artikel"
                                         required />
                                 </div>
                                 <div class="mb-3">
@@ -56,7 +56,7 @@
                                         for="content">Konten</label>
                                     <textarea
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="content" name="content" rows="4" placeholder="Tuliskan Konten yang Menrarik"></textarea>
+                                        id="content" name="content" rows="4" placeholder="isi artikel "></textarea>
                                 </div>
                             </div>
                         </div>

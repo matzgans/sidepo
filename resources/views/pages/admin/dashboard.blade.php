@@ -154,7 +154,10 @@
                             </td>
                             <td>{{ ucfirst($data->name) }}</td>
                             <td>{{ ucfirst($data->nik) }}</td>
-                            <td>{{ $data->birth }}</td>
+                            <td>
+                                {{ __(':age tahun', ['age' => \Carbon\Carbon::parse($data->birth)->diff(\Carbon\Carbon::now())->y]) }}
+
+                            </td>
                             <td>
                                 <ol class="mt-2 list-inside list-decimal space-y-1 ps-2">
                                     @foreach ($data->pelatihans as $pelatihan)
