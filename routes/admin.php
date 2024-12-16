@@ -20,4 +20,5 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('pelatihan', PelatihanController::class);
     Route::get("pelatihan/update_status/{update_status}", [PelatihanController::class, 'update_status'])->name('pelatihan.update_status');
     Route::get("pelatihan/delete_status/{delete_status}", [PelatihanController::class, 'delete_status'])->name('pelatihan.delete_status');
+    Route::delete("pelatihan/peserta/destroy/{pelatihan}", [PelatihanController::class, 'peserta_destroy'])->name('pelatihan.peserta.destroy');
 });

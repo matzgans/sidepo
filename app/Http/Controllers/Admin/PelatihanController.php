@@ -9,6 +9,8 @@ use App\Models\Peserta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use function PHPUnit\Framework\isEmpty;
+
 class PelatihanController extends Controller
 {
     /**
@@ -16,23 +18,21 @@ class PelatihanController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Peserta::with('pelatihans')
-            ->has('pelatihans'); // Hanya tampilkan data yang memiliki relasi pelatihans
+        $jenis_pelatihans = JenisPelatihan::with('pelatihans')->get();
+        // // Memeriksa apakah ada query pencarian
+        // if ($request->has('search') && $request->search) {
+        //     $searchTerm = $request->search;
 
-        // Memeriksa apakah ada query pencarian
-        if ($request->has('search') && $request->search) {
-            $searchTerm = $request->search;
+        //     // Menambahkan kondisi pencarian untuk beberapa kolom
+        //     $query->where(function ($query) use ($searchTerm) {
+        //         $query->where('name', 'LIKE', "%{$searchTerm}%")
+        //             ->orWhere('nik', 'LIKE', "%{$searchTerm}%");
+        //     });
+        // }
 
-            // Menambahkan kondisi pencarian untuk beberapa kolom
-            $query->where(function ($query) use ($searchTerm) {
-                $query->where('name', 'LIKE', "%{$searchTerm}%")
-                    ->orWhere('nik', 'LIKE', "%{$searchTerm}%");
-            });
-        }
+        // $pesertas = $query->paginate(3)->appends(['search' => $request->search]);
 
-        $pesertas = $query->paginate(3)->appends(['search' => $request->search]);
-
-        return view("pages.admin.pelatihan.index", compact('pesertas'));
+        return view("pages.admin.pelatihan.index", compact('jenis_pelatihans'));
     }
 
     /**
@@ -102,7 +102,8 @@ class PelatihanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $jenis_pelatihan = JenisPelatihan::findOrFail($id)->with('pelatihans')->first();
+        return view('pages.admin.pelatihan.edit', compact('jenis_pelatihan'));
     }
 
     /**
@@ -118,11 +119,13 @@ class PelatihanController extends Controller
      */
     public function destroy(string $id)
     {
-        $pelatihan = Pelatihan::where('peserta_id', $id)->get();
-        foreach ($pelatihan as $item) {
-            $item->delete();
+        $pelatihan = Pelatihan::where('jenis_pelatihan_id', $id);
+        if ($pelatihan->exists()) {
+            $pelatihan->delete();
+        } else {
+            dd("Data kosong");
         }
-        return redirect()->back()->with('success', "Data Jenis Pelatihan Berhasil Menghapus Semua data Pelatihan");
+        return redirect()->back()->with('success', "Berhasi Mengapus Data Pelatihan");
     }
     public function update_status(string $update_status)
     {
@@ -144,5 +147,13 @@ class PelatihanController extends Controller
         $pelatihan = Pelatihan::where('id', $delete_status)->first();
         $pelatihan->delete();
         return redirect()->back()->with('success', "Data Jenis Pelatihan Berhasil menyelesaikan pelatihan");
+    }
+    public function peserta_destroy($id)
+    {
+        $pelatihan_peserta_id = Pelatihan::where('peserta_id', $id)->first();
+        if ($pelatihan_peserta_id) {
+            $pelatihan_peserta_id->delete();
+        }
+        return redirect()->back()->with('success', "Data Jenis Pelatihan Berhasil Dihapus");
     }
 }
