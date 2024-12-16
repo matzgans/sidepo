@@ -5,6 +5,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'home'])->name('home');
+Route::prefix('landing')->name('admin.')->group(function () {
+    Route::get('detail/article/{uuid}', [LandingController::class, 'detail_article'])->name('detail.article');
+});
 
 
 Route::middleware('auth')->group(function () {

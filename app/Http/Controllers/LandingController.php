@@ -18,4 +18,15 @@ class LandingController extends Controller
         $articles = Article::where('is_status', 1)->get();
         return view('pages.landing.home', compact('jenis_pelatihans', 'articles', 'datas'));
     }
+
+    public function detail_article(string $uuid)
+    {
+        $article = Article::where('uuid', $uuid)->first();
+        $recomendationArticles = Article::where('is_status', 1)
+            ->inRandomOrder()
+            ->take(3)
+            ->get();
+
+        return view('pages.landing.detail_article', compact('article', 'recomendationArticles'));
+    }
 }

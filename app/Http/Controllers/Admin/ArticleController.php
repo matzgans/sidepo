@@ -44,7 +44,7 @@ class ArticleController extends Controller
         // Validasi input
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255|min:6|unique:articles,title',
-            'content' => 'required|string|max:500|min:6',
+            'content' => 'required|string|max:3000|min:6',
             'author' => 'required|string|max:255|min:6',
             'thumbnail' => 'required|image|mimes:jpeg,jpg,png|max:2048', // Mendukung 3 tipe file
         ]);

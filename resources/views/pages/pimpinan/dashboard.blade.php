@@ -78,100 +78,14 @@
             </div>
 
         </div>
-        <div class="mx-5 bg-white p-5">
+        <div class="mx-5 grid grid-cols-3 gap-3 p-5">
+            <div class="w-full shadow-lg" id="bar-chart"></div>
+            <div class="w-full shadow-lg" id="bar-chart-jk"></div>
+            <div class="w-full shadow-lg" id="pie-chart-status"></div>
 
 
-            <table id="export-table">
-                <thead>
-                    <tr>
-                        <th>
-                            <span class="flex items-center">
-                                Nomor
-                                <svg class="ms-1 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                Nama Peserta
-                                <svg class="ms-1 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                NIK
-                                <svg class="ms-1 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                        <th data-type="date" data-format="YYYY-MM-DD">
-                            <span class="flex items-center">
-                                Tanggal Lahir
-                                <svg class="ms-1 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                Pelatihan Yang Diambil
-                                <svg class="ms-1 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                Nomor Telephone
-                                <svg class="ms-1 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                    @foreach ($datas as $index => $data)
-                        <tr class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800">
-                            <td class="whitespace-nowrap font-medium text-gray-900 dark:text-white">{{ $index + 1 }}
-                            </td>
-                            <td>{{ ucfirst($data->name) }}</td>
-                            <td>{{ ucfirst($data->nik) }}</td>
-                            <td>
-                                {{ __(':age tahun', ['age' => \Carbon\Carbon::parse($data->birth)->diff(\Carbon\Carbon::now())->y]) }}
-
-                            </td>
-                            <td>
-                                <ol class="mt-2 list-inside list-decimal space-y-1 ps-2">
-                                    @foreach ($data->pelatihans as $pelatihan)
-                                        <li>{{ ucfirst($pelatihan->jenisPelatihan->title) }}</li>
-                                    @endforeach
-                                </ol>
-                            </td>
-                            <td>{{ $data->phone }} </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
         </div>
-
     </div>
     @push('after-scripts')
         <script>
@@ -322,7 +236,323 @@
                         space: 3
                     })
                 })
-            }
+            } // Data retrieved from https://gs.statcounter.com/browser-market-share#monthly-202201-202201-bar
+            // higchart 1
+            const data = @json($data_bar_chart); // Mengonversi data PHP ke format JSON yang dapat digunakan di JavaScript
+
+            // Bar-Chart-Data-jumlah-pelatihan 
+            const chartData = data.map(item => ({
+                name: item.title,
+                y: item.jumlah_peserta
+            }));
+
+            Highcharts.chart("bar-chart", {
+                chart: {
+                    type: "column",
+                },
+                title: {
+                    text: "Jumlah Peserta Pada Masing - Masing Pelatihan",
+                },
+                subtitle: {
+                    text: "Jumlah Peserta Pada Masing - Masing Pelatihan",
+                },
+                accessibility: {
+                    announceNewData: {
+                        enabled: true,
+                    },
+                },
+                xAxis: {
+                    type: "category",
+                },
+                yAxis: {
+                    title: {
+                        text: "Total Peserta",
+                    },
+                },
+                exporting: {
+                    enabled: true, // Mengaktifkan tombol export
+                    buttons: {
+                        contextButton: {
+                            menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG']
+                        }
+                    }
+                },
+                legend: {
+                    enabled: false,
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: "{point.y}",
+                        },
+                    },
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: ' +
+                        "<b>{point.y}</b> of total<br/>",
+                },
+                series: [{
+                    name: "Pelatihan",
+                    colorByPoint: true,
+                    data: chartData, // Menggunakan data yang telah diproses
+                }],
+            });
+            // Bar-Chart-Data-peserta-jk
+            const data_pie_jk = @json($data_pie_chart_jk);
+
+            const chartDataPie = data_pie_jk.map(item => ({
+                name: item.title,
+                y: item.jumlah_peserta
+            }));
+
+
+            (function(H) {
+                H.seriesTypes.pie.prototype.animate = function(init) {
+                    const series = this,
+                        chart = series.chart,
+                        points = series.points,
+                        {
+                            animation
+                        } = series.options,
+                        {
+                            startAngleRad
+                        } = series;
+
+                    function fanAnimate(point, startAngleRad) {
+                        const graphic = point.graphic,
+                            args = point.shapeArgs;
+
+                        if (graphic && args) {
+
+                            graphic
+                                // Set initial animation values
+                                .attr({
+                                    start: startAngleRad,
+                                    end: startAngleRad,
+                                    opacity: 1
+                                })
+                                // Animate to the final position
+                                .animate({
+                                    start: args.start,
+                                    end: args.end
+                                }, {
+                                    duration: animation.duration / points.length
+                                }, function() {
+                                    // On complete, start animating the next point
+                                    if (points[point.index + 1]) {
+                                        fanAnimate(points[point.index + 1], args.end);
+                                    }
+                                    // On the last point, fade in the data labels, then apply the inner size
+                                    if (point.index === series.points.length - 1) {
+                                        series.dataLabelsGroup.animate({
+                                                opacity: 1
+                                            },
+                                            void 0,
+                                            function() {
+                                                points.forEach(point => {
+                                                    point.opacity = 1;
+                                                });
+                                                series.update({
+                                                    enableMouseTracking: true
+                                                }, false);
+                                                chart.update({
+                                                    plotOptions: {
+                                                        pie: {
+                                                            innerSize: '40%',
+                                                            borderRadius: 8
+                                                        }
+                                                    }
+                                                });
+                                            });
+                                    }
+                                });
+                        }
+                    }
+
+                    if (init) {
+                        // Hide points on init
+                        points.forEach(point => {
+                            point.opacity = 0;
+                        });
+                    } else {
+                        fanAnimate(points[0], startAngleRad);
+                    }
+                };
+            }(Highcharts));
+
+            Highcharts.chart('bar-chart-jk', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Jumlah Peserta Menurut Jenis Kelamin'
+                },
+                subtitle: {
+                    text: 'Data Ini di urutkan sesuai Jenis Kelamin'
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span style="color:{point.color}">\u25cf</span> ' +
+                        '{point.name}: <b>{point.y}</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: ''
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        borderWidth: 2,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b><br>{point.y}',
+                            distance: 20
+                        }
+                    }
+                },
+                series: [{
+
+                    enableMouseTracking: false,
+                    animation: {
+                        duration: 2000
+                    },
+                    colorByPoint: true,
+                    data: chartDataPie // data yang telah dikirim dari controller
+                }]
+            });
+
+            // Bar-Chart-status-pelatihan
+            const data_pie_status = @json($data_pie_chart_status);
+            console.log(data_pie_status);
+
+
+            const chartDataPieStatus = data_pie_status.map(item => ({
+                name: item.status,
+                y: item.Jumlah
+            }));
+
+
+            (function(H) {
+                H.seriesTypes.pie.prototype.animate = function(init) {
+                    const series = this,
+                        chart = series.chart,
+                        points = series.points,
+                        {
+                            animation
+                        } = series.options,
+                        {
+                            startAngleRad
+                        } = series;
+
+                    function fanAnimate(point, startAngleRad) {
+                        const graphic = point.graphic,
+                            args = point.shapeArgs;
+
+                        if (graphic && args) {
+
+                            graphic
+                                // Set initial animation values
+                                .attr({
+                                    start: startAngleRad,
+                                    end: startAngleRad,
+                                    opacity: 1
+                                })
+                                // Animate to the final position
+                                .animate({
+                                    start: args.start,
+                                    end: args.end
+                                }, {
+                                    duration: animation.duration / points.length
+                                }, function() {
+                                    // On complete, start animating the next point
+                                    if (points[point.index + 1]) {
+                                        fanAnimate(points[point.index + 1], args.end);
+                                    }
+                                    // On the last point, fade in the data labels, then apply the inner size
+                                    if (point.index === series.points.length - 1) {
+                                        series.dataLabelsGroup.animate({
+                                                opacity: 1
+                                            },
+                                            void 0,
+                                            function() {
+                                                points.forEach(point => {
+                                                    point.opacity = 1;
+                                                });
+                                                series.update({
+                                                    enableMouseTracking: true
+                                                }, false);
+                                                chart.update({
+                                                    plotOptions: {
+                                                        pie: {
+                                                            innerSize: '40%',
+                                                            borderRadius: 8
+                                                        }
+                                                    }
+                                                });
+                                            });
+                                    }
+                                });
+                        }
+                    }
+
+                    if (init) {
+                        // Hide points on init
+                        points.forEach(point => {
+                            point.opacity = 0;
+                        });
+                    } else {
+                        fanAnimate(points[0], startAngleRad);
+                    }
+                };
+            }(Highcharts));
+
+            Highcharts.chart('pie-chart-status', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Status Pelatihan'
+                },
+                subtitle: {
+                    text: 'Data Ini di urutkan berdasarkan status pelatihan'
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span style="color:{point.color}">\u25cf</span> ' +
+                        '{point.name}: <b>{point.y}</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: ''
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        borderWidth: 2,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b><br>{point.y}',
+                            distance: 20
+                        }
+                    }
+                },
+                series: [{
+
+                    enableMouseTracking: false,
+                    animation: {
+                        duration: 2000
+                    },
+                    colorByPoint: true,
+                    data: chartDataPieStatus // data yang telah dikirim dari controller
+                }]
+            });
         </script>
     @endpush
 </x-app-layout>
