@@ -14,8 +14,9 @@ class LandingController extends Controller
     {
         $datas = Peserta::with('pelatihans')
             ->has('pelatihans')->get();
-        $jenis_pelatihans = JenisPelatihan::all();
+        // $jenis_pelatihans = JenisPelatihan::all();
         $articles = Article::where('is_status', 1)->get();
+        $jenis_pelatihans = JenisPelatihan::with('pelatihans')->get();
         return view('pages.landing.home', compact('jenis_pelatihans', 'articles', 'datas'));
     }
 

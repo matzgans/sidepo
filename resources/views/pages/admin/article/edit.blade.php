@@ -2,16 +2,19 @@
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="mb-2 overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                <div class="flex items-center justify-between p-6">
-                    <div class="text-lg font-bold text-primary_hover">Edit Data Artikel</div>
-                    <div class=""><a href="{{ route('admin.article.index') }}"><svg
-                                class="h-6 w-16 font-extrabold text-red-800 dark:text-white" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4" />
+            <div class="mb-4 overflow-hidden bg-gray-100 shadow-md sm:rounded-lg">
+                <div class="flex items-center justify-between rounded-t-lg bg-primary p-4 text-white">
+                    <div class="text-lg font-semibold">Edit Data Artikel</div>
+                    <div>
+                        <a class="flex items-center gap-2 text-sm font-medium hover:underline"
+                            href="{{ route('admin.article.index') }}">
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H3m0 0l6-6m-6 6l6 6" />
                             </svg>
-                        </a></div>
+                            Kembali
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="overflow-hidden bg-white p-6 shadow-sm sm:rounded-lg">
@@ -86,7 +89,7 @@
 
                     <button
                         class="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
-                        type="submit">Submit</button>
+                        type="submit">Update</button>
                 </form>
 
 

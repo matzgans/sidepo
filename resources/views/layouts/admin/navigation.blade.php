@@ -51,6 +51,11 @@
                                         {{ __('Jenis Pelatihan') }}
                                     </x-dropdown-link>
                                 </li>
+                                <li>
+                                    <x-dropdown-link :href="route('admin.employee.index')" :active="request()->routeIs('admin.employe.*')">
+                                        {{ __('Pimpinan') }}
+                                    </x-dropdown-link>
+                                </li>
                             </ul>
                         </div>
                     </li>

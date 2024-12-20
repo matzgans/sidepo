@@ -4,10 +4,10 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="mb-4 overflow-hidden bg-gray-100 shadow-md sm:rounded-lg">
                 <div class="flex items-center justify-between rounded-t-lg bg-primary p-4 text-white">
-                    <div class="text-lg font-semibold">Edit Data Jenis Pelatihan</div>
+                    <div class="text-lg font-semibold">Tambah Data Pimpinan</div>
                     <div>
                         <a class="flex items-center gap-2 text-sm font-medium hover:underline"
-                            href="{{ route('admin.jenis_pelatihan.index') }}">
+                            href="{{ route('admin.employee.index') }}">
                             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H3m0 0l6-6m-6 6l6 6" />
@@ -32,47 +32,27 @@
                         <span class="font-medium">{{ session('success') }}</span>
                     </div>
                 @endif
-                <form class="mx-auto max-w-full"
-                    action="{{ route('admin.jenis_pelatihan.update', ['jenis_pelatihan' => $jenis_pelatihan->id]) }}"
-                    method="POST" enctype="multipart/form-data">
-                    @method('PUT')
+                <form class="mx-auto max-w-full" action="{{ route('admin.employee.store') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="grid grid-cols-1 gap-4">
                         <div class="col-span-1">
                             <div class="">
                                 <div class="mb-3">
                                     <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                                        for="title">Nama</label>
+                                        for="name">Nama</label>
                                     <input
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="title" name="title" type="text"
-                                        value="{{ $jenis_pelatihan->title }}" placeholder="Tanggap Bencana ..."
+                                        id="name" name="name" type="text" placeholder="Masukan nama pimpinan"
                                         required />
                                 </div>
                                 <div class="mb-3">
                                     <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                                        for="desc">Deskipsi Pelatihan</label>
-                                    <textarea
-                                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="desc" name="desc" rows="4" placeholder="Pelatihan ini adalah ....">{{ $jenis_pelatihan->desc }}</textarea>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-3">
-                                <div class="mb-3">
-                                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                                        for="pelatihan_start">Tanggal Dimulai</label>
+                                        for="email">email</label>
                                     <input
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="pelatihan_start" name="pelatihan_start" type="date"
-                                        value="{{ $jenis_pelatihan->pelatihan_start }}" required />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                                        for="pelatihan_end">Tanggal Berakhir</label>
-                                    <input
-                                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="pelatihan_end" name="pelatihan_end" type="date"
-                                        value="{{ $jenis_pelatihan->pelatihan_end }}" required />
+                                        id="email" name="email" type="text"
+                                        placeholder="name_pimpinan@gmail.com" required />
                                 </div>
                             </div>
                         </div>
@@ -81,7 +61,7 @@
 
                     <button
                         class="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
-                        type="submit">Update</button>
+                        type="submit">Submit</button>
                 </form>
 
 

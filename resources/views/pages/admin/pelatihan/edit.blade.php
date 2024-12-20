@@ -30,11 +30,8 @@
                 </div>
             @endif
             <div class="grid h-full grid-cols-6 gap-4">
-                <!-- Detail untuk Jenis Pelatihan (col-span-2) -->
                 <div class="col-span-2 h-full overflow-hidden bg-white p-6 shadow-md sm:rounded-lg">
-                    <!-- Jenis Pelatihan -->
                     <h3 class="flex items-center text-lg font-semibold">
-                        <!-- Ikon untuk Jenis Pelatihan -->
                         <svg class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
@@ -46,10 +43,7 @@
                         Jenis Pelatihan
                     </h3>
                     <p>{{ $jenis_pelatihan->title }}</p>
-
-                    <!-- Tanggal Pelatihan -->
                     <h3 class="mt-4 flex items-center text-lg font-semibold">
-                        <!-- Ikon untuk Tanggal Pelatihan -->
                         <svg class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
@@ -64,10 +58,7 @@
                         -
                         {{ \Carbon\Carbon::parse($jenis_pelatihan->pelatihan_end)->locale('id')->isoFormat('dddd D MMMM YYYY') }}
                     </p>
-
-                    <!-- Deskripsi Pelatihan -->
                     <h3 class="mt-4 flex items-center text-lg font-semibold">
-                        <!-- Ikon untuk Deskripsi -->
                         <svg class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
@@ -80,80 +71,86 @@
                     </h3>
                     <p>{{ $jenis_pelatihan->desc }}</p>
                 </div>
-
-                <!-- Form untuk mengedit Jenis Pelatihan (col-span-4) -->
                 <div class="col-span-4 bg-white px-6 py-4 shadow-md sm:rounded-lg">
-
-
-
-                    <table id="search-table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <span class="flex items-center">
-                                        No
-                                    </span>
-                                </th>
-                                <th>
-                                    <span class="flex items-center">
-                                        Nama Peserta
-                                    </span>
-                                </th>
-                                <th>
-                                    <span class="flex items-center">
-                                        Status Pelatihan
-                                    </span>
-                                </th>
-                                <th>
-                                    <span class="flex items-center">
-                                        Acction
-                                    </span>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach ($jenis_pelatihan->pelatihans as $index => $item)
+                    <a class="mb-4 rounded-lg bg-purple-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                        href="{{ route('admin.pelatihan.update_status.all', ['jenis_pelatihan_id' => $jenis_pelatihan->id]) }}">Tandai
+                        Semua Selesai</a>
+                    <div class="mt-4">
+                        <table id="search-table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td class="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                        {{ $item->peserta->name }}</td>
-                                    <td>
-                                        @if ($item->is_status == 0)
-                                            Belum Pelatihan
-                                        @elseif ($item->is_status == 1)
-                                            Sedang Berlangsung
-                                        @elseif ($item->is_status == 2)
-                                            Sudah Selesai
-                                        @else
-                                            Status Tidak Diketahui
-                                        @endif
-                                    </td>
-                                    <td> <button class="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                                            data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                            data-name="{{ $item->peserta->name }}" data-id="{{ $item->peserta->id }}"
-                                            type="button" onclick="deleteData(this)"><svg
-                                                class="h-6 w-6 text-red-800 dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                                            </svg>
-
-                                        </button></td>
+                                    <th>
+                                        <span class="flex items-center">
+                                            No
+                                        </span>
+                                    </th>
+                                    <th>
+                                        <span class="flex items-center">
+                                            Nama Peserta
+                                        </span>
+                                    </th>
+                                    <th>
+                                        <span class="flex items-center">
+                                            Status Pelatihan
+                                        </span>
+                                    </th>
+                                    <th>
+                                        <span class="flex items-center">
+                                            Acction
+                                        </span>
+                                    </th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-
-
-
+                            </thead>
+                            <tbody>
+                                @foreach ($jenis_pelatihan->pelatihans as $index => $item)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td class="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                                            {{ $item->peserta->name }}</td>
+                                        <td>
+                                            <form id="formUpdate" method="POST"
+                                                action="{{ route('admin.pelatihan.update_status', ['pelatihan' => 'pelatihan_id']) }}">
+                                                @csrf
+                                                <select
+                                                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                                    id="status" name="status"
+                                                    onchange="updateStatus({{ $item->id }})">
+                                                    <option value="0"
+                                                        {{ $item->is_status == 0 ? 'selected' : '' }}>
+                                                        Belum
+                                                        Pelatihan</option>
+                                                    <option value="1"
+                                                        {{ $item->is_status == 1 ? 'selected' : '' }}>
+                                                        Sedang
+                                                        Berlangsung</option>
+                                                    <option value="2"
+                                                        {{ $item->is_status == 2 ? 'selected' : '' }}>
+                                                        Sudah
+                                                        Selesai</option>
+                                                </select>
+                                            </form>
+                                        </td>
+                                        <td> <button
+                                                class="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                                                data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+                                                data-name="{{ $item->peserta->name }}"
+                                                data-id="{{ $item->peserta->id }}" type="button"
+                                                onclick="deleteData(this)"><svg
+                                                    class="h-6 w-6 text-red-800 dark:text-white" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                                </svg>
+                                            </button></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
             </div>
-
         </div>
         <div class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
             id="popup-modal" tabindex="-1">
@@ -164,8 +161,8 @@
                         data-modal-hide="popup-modal" type="button">
                         <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
                         <span class="sr-only">Close modal</span>
                     </button>
@@ -183,7 +180,6 @@
                             method="POST">
                             @csrf
                             @method('DELETE')
-
                         </form>
                         <button
                             class="inline-flex items-center rounded-lg bg-red-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800"
@@ -201,6 +197,13 @@
 
     @push('after-scripts')
         <script>
+            function updateStatus(id) {
+                let form_update_status = document.getElementById("formUpdate");
+                let url_update_status = form_update_status.action.replace('pelatihan_id', id);
+                form_update_status.action = url_update_status;
+                document.getElementById("formUpdate").submit();
+            }
+
             if (document.getElementById("search-table") && typeof simpleDatatables.DataTable !== 'undefined') {
                 const dataTable = new simpleDatatables.DataTable("#search-table", {
                     searchable: true,
@@ -209,7 +212,6 @@
             }
 
             function deleteData(button) {
-
                 let dataName = button.getAttribute("data-name");
                 let dataid = button.getAttribute("data-id");
                 console.log(dataid);
@@ -217,13 +219,11 @@
                 let form = document.getElementById("delete-form");
                 let deleteName = document.getElementById("delete-title").innerHTML = `Kamu Akan Menghapus data ${dataName}`;
 
-                let url = form.action.replace('id', dataid); // Ganti 'id' di URL dengan dataId yang diterima
+                let url = form.action.replace('id', dataid);
                 form.action = url;
-
             }
 
             document.getElementById("confirm-delete-button").addEventListener("click", function() {
-                // Submit the form
                 document.getElementById("delete-form").submit();
             });
         </script>

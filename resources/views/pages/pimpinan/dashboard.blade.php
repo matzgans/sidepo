@@ -428,7 +428,6 @@
 
             // Bar-Chart-status-pelatihan
             const data_pie_status = @json($data_pie_chart_status);
-            console.log(data_pie_status);
 
 
             const chartDataPieStatus = data_pie_status.map(item => ({

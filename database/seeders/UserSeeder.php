@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
         $pimpinan =  User::create([
             'name' => "Pimpinan",
             'email' => "pimpinan@gmail.com",
-            'password' => bcrypt("password"),
+            'password' => bcrypt("pimpinan123"),
             'remember_token' => Str::random(60),
         ]);
         $pimpinan->assignRole('pimpinan');

@@ -1,9 +1,10 @@
 <x-app-layout>
+
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="mb-4 overflow-hidden bg-gray-100 shadow-md sm:rounded-lg">
                 <div class="flex items-center justify-between rounded-t-lg bg-primary p-4 text-white">
-                    <div class="text-lg font-semibold">Tambah Data Pelatihan</div>
+                    <div class="text-lg font-semibold">Tambah Data Pimpinan</div>
                     <div>
                         <a class="flex items-center gap-2 text-sm font-medium hover:underline"
                             href="{{ route('admin.dashboard') }}">
@@ -33,7 +34,7 @@
                 @endif
                 <div class="mb-3 flex items-center justify-start">
 
-                    <x-addfeature title="Tambah Pelatihan" link="{{ route('admin.pelatihan.create') }}"></x-addfeature>
+                    <x-addfeature title="Tambah Pimpinan" link="{{ route('admin.employee.create') }}"></x-addfeature>
                 </div>
                 <div class="relative overflow-x-auto shadow-md shadow-primary sm:rounded-lg">
 
@@ -47,17 +48,12 @@
                                 </th>
                                 <th>
                                     <span class="flex items-center">
-                                        Jenis Pelatihan
+                                        Nama
                                     </span>
                                 </th>
                                 <th>
                                     <span class="flex items-center">
-                                        Nama - Nama Peserta Pelatihan
-                                    </span>
-                                </th>
-                                <th data-type="date" data-format="Month YYYY">
-                                    <span class="flex items-center">
-                                        Waktu Pelatihan
+                                        Email
                                     </span>
                                 </th>
                                 <th>
@@ -68,53 +64,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($jenis_pelatihans as $index => $jenis_pelatihan)
+                            @foreach ($employees as $index => $employee)
                                 <tr>
                                     <td> {{ $index + 1 }}</td>
                                     <td class="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                        {{ $jenis_pelatihan->title }}
-                                        @if ($jenis_pelatihan->is_status == 2)
-                                            <svg class="inline h-6 w-6 text-green-600"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M5 13l4 4L19 7" />
-                                            </svg>
-                                        @endif
-                                    </td>
+                                        {{ $employee->name }}</td>
                                     <td class="">
-                                        <ol class="mt-2 list-inside list-decimal space-y-1 ps-2">
-                                            @if ($jenis_pelatihan->pelatihans->isNotEmpty())
-                                                @foreach ($jenis_pelatihan->pelatihans as $pelatihan)
-                                                    <li class="flex items-center">{{ $pelatihan->peserta->name }}
-                                                        @if ($pelatihan->is_status == 2)
-                                                            <svg class="me-2 h-3.5 w-3.5 flex-shrink-0 text-green-500 dark:text-green-400"
-                                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                                fill="currentColor" viewBox="0 0 20 20">
-                                                                <path
-                                                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                                                            </svg>
-                                                        @endif
-                                                    </li>
-                                                @endforeach
-                                            @else
-                                                <p class="text-red-600">Data Peserta pelatihan kosong</p>
-                                            @endif
-                                        </ol>
-                                    </td>
-                                    <td class="flex">
-                                        <div>
-                                            {{ \Carbon\Carbon::parse($jenis_pelatihan->pelatihan_start)->locale('id')->isoFormat('dddd D MMMM YYYY') }}
-                                        </div>
-                                        <span> - </span>
-                                        <div>
-                                            {{ \Carbon\Carbon::parse($jenis_pelatihan->pelatihan_end)->locale('id')->isoFormat('dddd D MMMM YYYY') }}
-                                        </div>
+                                        {{ $employee->email }}
                                     </td>
                                     <td>
-                                        <div class="flex justify-around">
+                                        <div class="flex">
                                             <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                                                href="{{ route('admin.pelatihan.edit', ['pelatihan' => $jenis_pelatihan->id]) }}"><svg
+                                                href="{{ route('admin.employee.edit', ['employee' => $employee->id]) }}"><svg
                                                     class="h-6 w-6 text-yellow-400 dark:text-white" aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     fill="none" viewBox="0 0 24 24">
@@ -125,9 +86,8 @@
                                             </a>
                                             <button class="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                                 data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                                data-title="{{ $jenis_pelatihan->title }}"
-                                                data-id="{{ $jenis_pelatihan->id }}" type="button"
-                                                onclick="deleteData(this)"><svg
+                                                data-title="{{ $employee->name }}" data-id="{{ $employee->id }}"
+                                                type="button" onclick="deleteData(this)"><svg
                                                     class="h-6 w-6 text-red-800 dark:text-white" aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     fill="none" viewBox="0 0 24 24">
@@ -158,21 +118,21 @@
                         data-modal-hide="popup-modal" type="button">
                         <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
                         <span class="sr-only">Close modal</span>
                     </button>
                     <div class="p-4 text-center md:p-5">
                         <svg class="mx-auto mb-4 h-12 w-12 text-gray-400 dark:text-gray-200" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400" id="delete-title">Kamu
                             Akan Menghapus Data
                         </h3>
-                        <form id="delete-form" action="{{ route('admin.pelatihan.destroy', ['pelatihan' => 'id']) }}"
+                        <form id="delete-form" action="{{ route('admin.employee.destroy', ['employee' => 'id']) }}"
                             method="POST">
                             @csrf
                             @method('DELETE')

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("jenis_pelatihan_id")->constrained("jenis_pelatihans")->cascadeOnDelete();
             $table->foreignId("peserta_id")->constrained("pesertas")->cascadeOnDelete();
-            $table->enum('is_status', [0, 1, 2])->default(2);
+            $table->integer('is_status')->default(2);
             $table->timestamps();
         });
     }

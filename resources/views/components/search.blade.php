@@ -1,4 +1,4 @@
-<form class="w-full" action="{{ $attributes['fromAction'] }}" method="GET">
+<form class="me-2 w-full" action="{{ $attributes['fromAction'] }}" method="GET">
 
     <label class="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white" for="default-search">Search</label>
     <div class="relative">

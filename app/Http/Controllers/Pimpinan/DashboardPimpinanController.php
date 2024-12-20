@@ -17,7 +17,7 @@ class DashboardPimpinanController extends Controller
             ->has('pelatihans')->get();
         $count_pesertas = Peserta::count();
         $count_jenis_pelatihans = JenisPelatihan::count();
-        $count_telah_pelatihans = Pelatihan::where('is_status', 3)->count();
+        $count_telah_pelatihans = Pelatihan::where('is_status', 2)->count();
 
         // data bar-chart
         $data_bar_chart = DB::table('jenis_pelatihans')
@@ -35,14 +35,14 @@ class DashboardPimpinanController extends Controller
         $data_pie_chart_status = Pelatihan::select(
             DB::raw('
                     CASE 
-                        WHEN is_status = "0" THEN "Pelatihan Belum selesai" 
-                        WHEN is_status = "1" THEN "Pelatihan Tidak Selesai" 
-                        WHEN is_status = "2" THEN "Pelatihan Selesai" 
+                        WHEN is_status = 0 THEN "Belum Pelatiham" 
+                        WHEN is_status = 1 THEN "Pelatihan Sedang Berlangsung" 
+                        WHEN is_status = 2 THEN "Pelatihan Selesai" 
                     END as status
                 '),
             DB::raw('count(*) as Jumlah')
         )
-            ->whereIn('is_status', ["0", "1", "2"])  // Pastikan tipe data string untuk ENUM
+            ->whereIn('is_status', [0, 1, 2])  // Pastikan tipe data string untuk ENUM
             ->groupBy('is_status')
             ->get();
 
