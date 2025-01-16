@@ -18,6 +18,20 @@
                 </div>
             </div>
             <div class="overflow-hidden bg-white p-6 shadow-sm sm:rounded-lg">
+                @if ($errors->any())
+                    <div class="mb-4 rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-800"
+                        role="alert">
+                        <span class="font-medium">Mohon Perhatian:</span>
+                        @foreach ($errors->all() as $error)
+                            {{ $error }}
+                        @endforeach
+                    </div>
+                @elseif(session('success'))
+                    <div class="mb-4 rounded-lg border border-green-300 bg-green-50 p-4 text-sm text-green-800"
+                        role="alert">
+                        <span class="font-medium">{{ session('success') }}</span>
+                    </div>
+                @endif
                 <div class="mb-3 flex items-center justify-between">
                     <x-search fromAction="{{ route('admin.jenis_pelatihan.index') }}"
                         placeholder="Cari Jenis Pelatihan..."></x-search>
@@ -25,7 +39,7 @@
                     <x-addfeature link="{{ route('admin.jenis_pelatihan.create') }}"></x-addfeature>
                 </div>
                 <div class="relative overflow-x-auto shadow-md shadow-primary sm:rounded-lg">
-                    <table class="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
+                    <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
                         <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th class="px-6 py-3" scope="col">
@@ -36,6 +50,9 @@
                                 </th>
                                 <th class="px-6 py-3" scope="col">
                                     Deskripsi
+                                </th>
+                                <th class="px-6 py-3" scope="col">
+                                    Nilai Standar
                                 </th>
                                 <th class="px-6 py-3" scope="col">
                                     Tanggal Mulai
@@ -61,6 +78,9 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $jenis_pelatihan->desc }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $jenis_pelatihan->pelatihan_standart_value }}
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ \Carbon\Carbon::parse($jenis_pelatihan->pelatihan_start)->locale('id')->isoFormat('dddd D MMMM YYYY') }}
@@ -125,8 +145,8 @@
                         data-modal-hide="popup-modal" type="button">
                         <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
                         <span class="sr-only">Close modal</span>
                     </button>

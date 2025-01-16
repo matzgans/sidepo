@@ -42,6 +42,7 @@ class JenisPelatihanController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255|min:6|unique:jenis_pelatihans',
             'desc' => 'required|string|max:500|min:6',
+            'pelatihan_standart_value' => 'required|numeric',
             'pelatihan_start' => 'required|date',
             'pelatihan_end' => 'required|date',
 
@@ -53,12 +54,13 @@ class JenisPelatihanController extends Controller
         }
         JenisPelatihan::create([
             'title' => $request->title,
+            'pelatihan_standart_value' => $request->pelatihan_standart_value,
             'desc' => $request->desc,
             'pelatihan_start' => $request->pelatihan_start,
             'pelatihan_end' => $request->pelatihan_end,
         ]);
 
-        return redirect()->back()->with('success', "Data Jenis Pelatihan Berhasil Ditambahkan");
+        return redirect()->route('admin.jenis_pelatihan.index')->with('success', "Data Jenis Pelatihan Berhasil Diubah");
     }
 
     /**
@@ -86,6 +88,7 @@ class JenisPelatihanController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255|min:6|unique:jenis_pelatihans,title,' . $jenis_pelatihan->id,
             'desc' => 'required|string|max:255|min:6',
+            'pelatihan_standart_value' => 'required|numeric',
             'pelatihan_start' => 'required|date',
             'pelatihan_end' => 'required|date',
 
@@ -98,10 +101,11 @@ class JenisPelatihanController extends Controller
         $jenis_pelatihan->update([
             'title' => $request->title,
             'desc' => $request->desc,
+            'pelatihan_standart_value' => $request->pelatihan_standart_value,
             'pelatihan_start' => $request->pelatihan_start,
             'pelatihan_end' => $request->pelatihan_end,
         ]);
-        return redirect()->back()->with('success', "Data Jenis Pelatihan Berhasil Diubah");
+        return redirect()->route('admin.jenis_pelatihan.index')->with('success', "Data Jenis Pelatihan Berhasil Diubah");
     }
 
     /**

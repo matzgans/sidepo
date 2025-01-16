@@ -88,25 +88,31 @@
                                         @endif
                                     </td>
                                     <td class="">
-                                        <ol class="mt-2 list-inside list-decimal space-y-1 ps-2">
+                                        <ol class="list-inside list-decimal text-gray-500 dark:text-gray-400">
                                             @if ($jenis_pelatihan->pelatihans->isNotEmpty())
                                                 @foreach ($jenis_pelatihan->pelatihans as $pelatihan)
-                                                    <li class="flex items-center">{{ $pelatihan->peserta->name }}
-                                                        @if ($pelatihan->is_status == 2)
-                                                            <svg class="me-2 h-3.5 w-3.5 flex-shrink-0 text-green-500 dark:text-green-400"
-                                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                                fill="currentColor" viewBox="0 0 20 20">
-                                                                <path
-                                                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                                                            </svg>
-                                                        @endif
+                                                    <li class="list-inside list-decimal">
+                                                        <span class="inline-flex items-center space-x-2">
+                                                            <span class="font-semibold text-gray-900 dark:text-white">
+                                                                {{ $pelatihan->peserta->name }}
+                                                            </span>
+                                                            @if ($pelatihan->is_status == 2)
+                                                                <svg class="h-4 w-4 text-green-500 dark:text-green-400"
+                                                                    aria-hidden="true"
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    fill="currentColor" viewBox="0 0 20 20">
+                                                                    <path
+                                                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                                                </svg>
+                                                            @endif
+                                                        </span>
                                                     </li>
                                                 @endforeach
-                                            @else
-                                                <p class="text-red-600">Data Peserta pelatihan kosong</p>
                                             @endif
                                         </ol>
                                     </td>
+
+
                                     <td class="flex">
                                         <div>
                                             {{ \Carbon\Carbon::parse($jenis_pelatihan->pelatihan_start)->locale('id')->isoFormat('dddd D MMMM YYYY') }}
@@ -204,8 +210,8 @@
             if (document.getElementById("pagination-table") && typeof simpleDatatables.DataTable !== 'undefined') {
                 const dataTable = new simpleDatatables.DataTable("#pagination-table", {
                     paging: true,
-                    perPage: 5,
-                    perPageSelect: [5, 10, 15, 20, 25],
+                    perPage: 2,
+                    perPageSelect: [2, 5, 10, 20, 50],
                     sortable: false
                     // labels: {
                     //     placeholder: "Cari...", // Informasi jumlah data

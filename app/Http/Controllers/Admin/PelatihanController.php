@@ -117,6 +117,42 @@ class PelatihanController extends Controller
     {
         //
     }
+    public function edit_score(Pelatihan $pelatihan)
+    {
+        return view('pages.admin.pelatihan.score.edit', compact('pelatihan'));
+    }
+    public function update_score(Request $request, Pelatihan $pelatihan)
+    {
+        $validator = Validator::make($request->all(), [
+            'score_absensi' => 'required|numeric',
+            'score_tugas' => 'required|numeric',
+            'score_test' => 'required|numeric',
+        ]);
+
+        // Jika validasi gagal
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Mendapatkan nilai standar pelatihan
+        $pelatihanStandartValue = $pelatihan->jenisPelatihan->pelatihan_standart_value;
+
+        // Menjumlahkan semua skor
+        $totalScore = $request->score_absensi + $request->score_tugas + $request->score_test;
+
+        // Memeriksa apakah total skor lebih besar atau sama dengan nilai standar
+        if ($totalScore >= $pelatihanStandartValue) {
+            // Set is_status menjadi 2 jika total skor memenuhi syarat
+            $pelatihan->score_absensi = $request->score_absensi;
+            $pelatihan->score_tugas = $request->score_tugas;
+            $pelatihan->score_test = $request->score_test;
+            $pelatihan->is_status = 2;
+            $pelatihan->save();
+        }
+
+        // Redirect ke halaman edit pelatihan
+        return redirect()->route('admin.pelatihan.edit', ['pelatihan' => $pelatihan->jenisPelatihan->id]);
+    }
 
     /**
      * Remove the specified resource from storage.

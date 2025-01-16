@@ -21,5 +21,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('pelatihan', PelatihanController::class);
     Route::post("pelatihan/update_status/{pelatihan}", [PelatihanController::class, 'update_status'])->name('pelatihan.update_status');
     Route::get("pelatihan/update_status/all/{jenis_pelatihan_id}", [PelatihanController::class, 'update_status_all'])->name('pelatihan.update_status.all');
+    Route::get("pelatihan/edit_score/{pelatihan}", [PelatihanController::class, 'edit_score'])->name('pelatihan.edit_score');
+    Route::put("pelatihan/update_score/{pelatihan}", [PelatihanController::class, 'update_score'])->name('pelatihan.update_score');
     Route::delete("pelatihan/peserta/destroy/{pelatihan}", [PelatihanController::class, 'peserta_destroy'])->name('pelatihan.peserta.destroy');
 });

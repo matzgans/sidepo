@@ -4,10 +4,10 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="mb-4 overflow-hidden bg-gray-100 shadow-md sm:rounded-lg">
                 <div class="flex items-center justify-between rounded-t-lg bg-primary p-4 text-white">
-                    <div class="text-lg font-semibold">Tambah Data Jenis Pelatihan</div>
+                    <div class="text-lg font-semibold">Edit Data Jenis Peserta</div>
                     <div>
                         <a class="flex items-center gap-2 text-sm font-medium hover:underline"
-                            href="{{ route('admin.jenis_pelatihan.index') }}">
+                            href="{{ route('admin.pelatihan.index') }}">
                             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H3m0 0l6-6m-6 6l6 6" />
@@ -32,50 +32,44 @@
                         <span class="font-medium">{{ session('success') }}</span>
                     </div>
                 @endif
-                <form class="mx-auto max-w-full" action="{{ route('admin.jenis_pelatihan.store') }}" method="POST"
-                    enctype="multipart/form-data">
+                <form class="mx-auto max-w-full" action="{{ route('admin.pelatihan.update_score', $pelatihan->id) }}"
+                    method="POST" enctype="multipart/form-data">
+                    @method('PUT')
                     @csrf
-                    <div class="grid grid-cols-1 gap-4">
+                    <div class="grid grid-cols-1 gap-1">
                         <div class="col-span-1">
                             <div class="">
                                 <div class="mb-3">
                                     <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                                        for="title">Nama Pelatihan</label>
+                                        for="score_absensi">Skor Kehadiran</label>
                                     <input
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="title" name="title" type="text"
-                                        placeholder="masukkan jenis pelatihan " required />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                                        for="pelatihan_standart_value">Nilai Standar Pelatihan</label>
-                                    <input
-                                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="pelatihan_standart_value" name="pelatihan_standart_value" type="number"
-                                        placeholder="masukkan nilai standar " required />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                                        for="desc">Deskipsi Pelatihan</label>
-                                    <textarea
-                                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="desc" name="desc" rows="4" placeholder="Penjelasan menggenai pelatihan "></textarea>
+                                        id="score_absensi" name="score_absensi" type="number"
+                                        value="{{ $pelatihan->score_absensi }}" placeholder="...." required />
                                 </div>
                             </div>
-                            <div class="grid grid-cols-2 gap-3">
+                        </div>
+                        <div class="col-span-1">
+                            <div class="">
                                 <div class="mb-3">
                                     <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                                        for="pelatihan_start">Tanggal Dimulai</label>
+                                        for="score_tugas">Skor Tugas</label>
                                     <input
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="pelatihan_start" name="pelatihan_start" type="date" required />
+                                        id="score_tugas" name="score_tugas" type="number"
+                                        value="{{ $pelatihan->score_tugas }}" placeholder="...." required />
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-span-1">
+                            <div class="">
                                 <div class="mb-3">
                                     <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                                        for="pelatihan_end">Tanggal Berakhir</label>
+                                        for="score_test">Skor Tes</label>
                                     <input
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                        id="pelatihan_end" name="pelatihan_end" type="date" required />
+                                        id="score_test" name="score_test" type="number"
+                                        value="{{ $pelatihan->score_test }}" placeholder="...." required />
                                 </div>
                             </div>
                         </div>
@@ -84,7 +78,7 @@
 
                     <button
                         class="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
-                        type="submit">Submit</button>
+                        type="submit">Ubah</button>
                 </form>
 
 
@@ -92,5 +86,31 @@
         </div>
     </div>
     @push('after-scripts')
+        <script>
+            // Menunggu hingga DOM sepenuhnya dimuat
+            document.addEventListener('DOMContentLoaded', function() {
+                // Fungsi untuk preview gambar
+                function previewImage(event) {
+                    const file = event.target.files[0]; // Ambil file yang dipilih
+                    const reader = new FileReader();
+                    console.log(file);
+
+
+                    // Ketika file berhasil dibaca, tampilkan preview gambar
+                    reader.onload = function() {
+                        const imagePreview = document.getElementById('imagePreview');
+                        imagePreview.src = reader.result; // Update sumber gambar dengan file yang dibaca
+                    };
+
+                    if (file) {
+                        reader.readAsDataURL(file); // Membaca file sebagai data URL
+                    }
+                }
+
+                // Menambahkan event listener ke elemen input
+                const fileInput = document.getElementById('file_input');
+                fileInput.addEventListener('change', previewImage);
+            });
+        </script>
     @endpush
 </x-app-layout>
