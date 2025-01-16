@@ -42,6 +42,12 @@ class PelatihanController extends Controller
             'peserta_id' => 'required|exists:pesertas,id',
             'jenis_pelatihan_id' => 'required|array|min:1',
             'jenis_pelatihan_id.*' => 'exists:jenis_pelatihans,id',
+            'score_absensi' => 'required|array',
+            'score_absensi.*' => 'numeric|min:0|max:100',
+            'score_tugas' => 'required|array',
+            'score_tugas.*' => 'numeric|min:0|max:100',
+            'score_test' => 'required|array',
+            'score_test.*' => 'numeric|min:0|max:100',
         ]);
 
         // Jika validasi gagal
@@ -50,7 +56,7 @@ class PelatihanController extends Controller
         }
 
         // Looping untuk menyimpan data pelatihan
-        foreach ($request->jenis_pelatihan_id as $item) {
+        foreach ($request->jenis_pelatihan_id as $index => $item) {
             $existing = Pelatihan::where('peserta_id', $request->peserta_id)
                 ->where('jenis_pelatihan_id', $item)
                 ->exists();
@@ -61,23 +67,35 @@ class PelatihanController extends Controller
                 ]);
             }
 
-            // Simpan data jenis pelatihan jika tidak ada duplikasi
+            // Ambil data jenis pelatihan
+            $jenisPelatihan = JenisPelatihan::findOrFail($item);
+
+            // Hitung total nilai
+            $totalScore = ($request->score_absensi[$index] ?? 0) + ($request->score_tugas[$index] ?? 0) + ($request->score_test[$index] ?? 0);
+
+            // Tentukan status berdasarkan totalScore vs standar_value
+            $status = $totalScore >= $jenisPelatihan->pelatihan_standart_value ? 2 : 1;
+
+            // Simpan data pelatihan
             Pelatihan::create([
                 'peserta_id' => $request->peserta_id,
                 'jenis_pelatihan_id' => $item,
-                'is_status' => 1
+                'score_absensi' => $request->score_absensi[$index] ?? 0,
+                'score_tugas' => $request->score_tugas[$index] ?? 0,
+                'score_test' => $request->score_test[$index] ?? 0,
+                'is_status' => $status,
             ]);
         }
 
         // Redirect dengan pesan sukses
-        return redirect()->back()->with('success', "Data Jenis Pelatihan Berhasil Ditambahkan");
+        return redirect()->route('admin.pelatihan.index')->with('success', "Data Jenis Pelatihan Berhasil Ditambahkan");
     }
 
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         //
     }

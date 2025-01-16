@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text("desc");
             $table->string("pelatihan_start");
+            $table->bigInteger("pelatihan_standart_value")->nullable()->default(100);
             $table->string("pelatihan_end");
             $table->timestamps();
         });

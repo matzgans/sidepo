@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId("jenis_pelatihan_id")->constrained("jenis_pelatihans")->cascadeOnDelete();
             $table->foreignId("peserta_id")->constrained("pesertas")->cascadeOnDelete();
+            $table->integer('score_absensi')->nullable();
+            $table->integer('score_tugas')->nullable();
+            $table->integer('score_test')->nullable();
             $table->integer('is_status')->default(2);
             $table->timestamps();
         });

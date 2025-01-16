@@ -60,6 +60,11 @@
                                         Waktu Pelatihan
                                     </span>
                                 </th>
+                                <th data-type="date" data-format="Month YYYY">
+                                    <span class="flex items-center">
+                                        Nilai Standar
+                                    </span>
+                                </th>
                                 <th>
                                     <span class="flex items-center">
                                         Aksi
@@ -110,6 +115,9 @@
                                         <div>
                                             {{ \Carbon\Carbon::parse($jenis_pelatihan->pelatihan_end)->locale('id')->isoFormat('dddd D MMMM YYYY') }}
                                         </div>
+                                    </td>
+                                    <td>
+                                        {{ $jenis_pelatihan->pelatihan_standart_value }}
                                     </td>
                                     <td>
                                         <div class="flex justify-around">

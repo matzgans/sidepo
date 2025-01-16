@@ -33,8 +33,8 @@
                     </div>
                 @endif
 
-                <form class="mx-auto max-w-full" action="{{ route('admin.pelatihan.store') }}" method="POST"
-                    enctype="multipart/form-data">
+                <form class="mx-auto max-w-full" id="pelatihanForm" action="{{ route('admin.pelatihan.store') }}"
+                    method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="grid grid-cols-1 gap-6">
                         <div>
@@ -74,20 +74,21 @@
             function tambahJenisPelatihan() {
                 const container = document.getElementById('jenisPelatihanContainer');
 
-                // Wrapper div untuk setiap input
+                // Wrapper div untuk setiap set input
                 const wrapperDiv = document.createElement('div');
-                wrapperDiv.className = "relative mt-2 flex items-center gap-2";
+                wrapperDiv.className = "relative mt-4 p-4 border rounded-lg bg-gray-50";
 
-                // Select input
+                // Select input untuk jenis pelatihan
                 const newSelect = document.createElement('select');
                 newSelect.className =
-                    "block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-700 focus:border-blue-500 focus:ring-blue-500";
+                    "block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-700 focus:border-blue-500 focus:ring-blue-500 mb-2";
                 newSelect.name = "jenis_pelatihan_id[]";
                 newSelect.required = true;
 
                 const defaultOption = document.createElement('option');
                 defaultOption.text = "Pilih Jenis Pelatihan";
                 defaultOption.selected = true;
+                defaultOption.disabled = true;
                 newSelect.appendChild(defaultOption);
 
                 jenisPelatihanData.forEach(pelatihan => {
@@ -97,11 +98,38 @@
                     newSelect.appendChild(option);
                 });
 
+                // Input untuk Score Absensi
+                const scoreAbsensiInput = document.createElement('input');
+                scoreAbsensiInput.type = "number";
+                scoreAbsensiInput.name = "score_absensi[]";
+                scoreAbsensiInput.placeholder = "Score Absensi";
+                scoreAbsensiInput.className =
+                    "block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-700 focus:border-blue-500 focus:ring-blue-500 mb-2";
+                scoreAbsensiInput.required = true;
+
+                // Input untuk Score Tugas
+                const scoreTugasInput = document.createElement('input');
+                scoreTugasInput.type = "number";
+                scoreTugasInput.name = "score_tugas[]";
+                scoreTugasInput.placeholder = "Score Tugas";
+                scoreTugasInput.className =
+                    "block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-700 focus:border-blue-500 focus:ring-blue-500 mb-2";
+                scoreTugasInput.required = true;
+
+                // Input untuk Score Test
+                const scoreTestInput = document.createElement('input');
+                scoreTestInput.type = "number";
+                scoreTestInput.name = "score_test[]";
+                scoreTestInput.placeholder = "Score Test";
+                scoreTestInput.className =
+                    "block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-700 focus:border-blue-500 focus:ring-blue-500 mb-2";
+                scoreTestInput.required = true;
+
                 // Tombol hapus
                 const deleteButton = document.createElement('button');
                 deleteButton.type = "button";
                 deleteButton.className =
-                    "inline-block rounded bg-red-500 px-3 py-1.5 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300";
+                    "mt-2 inline-block rounded bg-red-500 px-3 py-1.5 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300";
                 deleteButton.textContent = "Hapus";
                 deleteButton.addEventListener('click', () => {
                     container.removeChild(wrapperDiv);
@@ -109,6 +137,9 @@
 
                 // Append elemen ke wrapper
                 wrapperDiv.appendChild(newSelect);
+                wrapperDiv.appendChild(scoreAbsensiInput);
+                wrapperDiv.appendChild(scoreTugasInput);
+                wrapperDiv.appendChild(scoreTestInput);
                 wrapperDiv.appendChild(deleteButton);
 
                 // Append wrapper ke container
@@ -116,6 +147,26 @@
             }
 
             document.getElementById('tambahJenisPelatihanButton').addEventListener('click', tambahJenisPelatihan);
+
+            // Validasi sebelum submit
+            document.getElementById('pelatihanForm').addEventListener('submit', (e) => {
+                const inputs = document.querySelectorAll('input[required], select[required]');
+                let isValid = true;
+
+                inputs.forEach(input => {
+                    if (!input.value) {
+                        isValid = false;
+                        input.classList.add('border-red-500');
+                    } else {
+                        input.classList.remove('border-red-500');
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault();
+                    alert('Harap isi semua input yang wajib!');
+                }
+            });
         </script>
     @endpush
 </x-app-layout>
