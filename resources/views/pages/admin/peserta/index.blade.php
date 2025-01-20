@@ -18,13 +18,27 @@
                 </div>
             </div>
             <div class="overflow-hidden bg-white p-6 shadow-sm sm:rounded-lg">
+                @if ($errors->any())
+                    <div class="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-800 dark:bg-gray-800 dark:text-red-400"
+                        role="alert">
+                        <span class="font-medium">Mohon Diperhatikan</span>
+                        @foreach ($errors->all() as $error)
+                            {{ $error }},
+                        @endforeach
+                    </div>
+                @elseif(session('success'))
+                    <div class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800 dark:bg-gray-800 dark:text-green-400"
+                        role="alert">
+                        <span class="font-medium">{{ session('success') }}</span>
+                    </div>
+                @endif
                 <div class="mb-3 flex items-center justify-between">
                     <x-search fromAction="{{ route('admin.pesertas.index') }}" placeholder="Cari Nama / Nik"></x-search>
 
                     <x-addfeature link="{{ route('admin.pesertas.create') }}"></x-addfeature>
                 </div>
                 <div class="relative overflow-x-auto shadow-md shadow-primary sm:rounded-lg">
-                    <table class="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
+                    <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
                         <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th class="px-6 py-3" scope="col">

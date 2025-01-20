@@ -48,8 +48,8 @@ class DashboardPimpinanController extends Controller
 
 
 
-
+        $jenis_pelatihans = JenisPelatihan::with('pelatihans')->get();
         // dd($data_pie_chart_jk);
-        return view('pages.pimpinan.dashboard', compact('data_pie_chart_status', 'data_pie_chart_jk', 'data_bar_chart', 'datas', 'count_pesertas', 'count_jenis_pelatihans', 'count_telah_pelatihans'));
+        return view('pages.pimpinan.dashboard', compact('jenis_pelatihans', 'data_pie_chart_status', 'data_pie_chart_jk', 'data_bar_chart', 'datas', 'count_pesertas', 'count_jenis_pelatihans', 'count_telah_pelatihans'));
     }
 }

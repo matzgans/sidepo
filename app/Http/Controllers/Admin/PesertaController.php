@@ -72,7 +72,7 @@ class PesertaController extends Controller
             'address' => $request->address,
         ]);
 
-        return redirect()->back()->with('success', "Data Peserta Berhasil Ditambahkan");
+        return redirect()->route('admin.pesertas.index')->with('success', "Data Peserta Berhasil Ditambahkan");
     }
 
     /**
@@ -136,7 +136,7 @@ class PesertaController extends Controller
             'address' => $request->address,
         ]);
 
-        return redirect()->back()->with('success', "Data Peserta Berhasil Di ubah");
+        return redirect()->route('admin.pesertas.index')->with('success', "Data Peserta Berhasil Di ubah");
     }
 
     /**
@@ -144,13 +144,6 @@ class PesertaController extends Controller
      */
     public function destroy(Peserta $peserta)
     {
-
-        // if ($peserta->photo && file_exists(public_path('profilephoto/' . $peserta->photo))) {
-        //     Jika ada, hapus gambar dari folder penyimpanan
-        //     Storage::delete('public/profilephoto/' . $peserta->photo);
-        //     unlink(public_path() . '/profilephoto/' .  $peserta->photo);
-        // }
-
         if ($peserta->photo && file_exists(public_path('profilephoto/' . $peserta->photo))) {
             unlink(public_path('profilephoto/' . $peserta->photo)); // Menghapus gambar lama
         }

@@ -82,13 +82,185 @@
             <div class="w-full shadow-lg" id="bar-chart"></div>
             <div class="w-full shadow-lg" id="bar-chart-jk"></div>
             <div class="w-full shadow-lg" id="pie-chart-status"></div>
+        </div>
+
+        <div class="grid-col-12 grid">
+            <div class="bg-gray-100 text-gray-900">
+                <div class="container mx-auto text-center">
+                    <h2 class="mb-8 text-3xl font-bold">Peserta Pelatihan Potensi</h2>
+                    <div class="mx-5 bg-white p-5 shadow-lg">
+                        <table id="pagination-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span class="flex items-center">
+                                            No
+                                        </span>
+                                    </th>
+                                    <th>
+                                        <span class="flex items-center">
+                                            Jenis Pelatihan
+                                        </span>
+                                    </th>
+                                    <th>
+                                        <span class="flex items-center">
+                                            Nama - Nama Peserta Pelatihan
+                                        </span>
+                                    </th>
+                                    <th data-type="date" data-format="Month YYYY">
+                                        <span class="flex items-center">
+                                            Waktu Pelatihan
+                                        </span>
+                                    </th>
+                                    <th data-type="date" data-format="Month YYYY">
+                                        <span class="flex items-center">
+                                            Waktu Pelatihan
+                                        </span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($jenis_pelatihans as $index => $jenis_pelatihan)
+                                    <tr>
+                                        <td> {{ $index + 1 }}</td>
+                                        <td class="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                                            {{ $jenis_pelatihan->title }}</td>
+                                        <td class="">
+                                            <ol class="mt-2 list-inside list-decimal space-y-1 ps-2">
+                                                @if ($jenis_pelatihan->pelatihans->isNotEmpty())
+                                                    @foreach ($jenis_pelatihan->pelatihans as $pelatihan)
+                                                        @php
+                                                            // Menghitung total skor
+                                                            $total_score =
+                                                                $pelatihan->score_absensi +
+                                                                $pelatihan->score_tugas +
+                                                                $pelatihan->score_test;
+                                                            // Membandingkan dengan nilai standar
+                                                            $status =
+                                                                $total_score >=
+                                                                $jenis_pelatihan->pelatihan_standart_value
+                                                                    ? 'Lulus'
+                                                                    : 'Tidak Lulus';
+                                                        @endphp
+                                                        <li class="flex">
+                                                            {{ $pelatihan->peserta->name }} -
+                                                            <span
+                                                                class="text-{{ $status == 'Lulus' ? 'green' : 'red' }}-600 font-bold">
+                                                                {{ $status }}
+                                                            </span>
+                                                            <button class="ms-3 flex" data-modal-target="progress-modal"
+                                                                data-modal-toggle="progress-modal"
+                                                                data-name="{{ $pelatihan->peserta->name }}"
+                                                                data-absensi="{{ $pelatihan->score_absensi }}"
+                                                                data-tugas="{{ $pelatihan->score_tugas }}"
+                                                                data-test="{{ $pelatihan->score_test }}"
+                                                                type="button">
+                                                                Detail Nilai
+                                                                <svg class="h-[19px] w-[19px] text-gray-800 dark:text-white"
+                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" fill="blue" viewBox="0 0 24 24">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M4.998 7.78C6.729 6.345 9.198 5 12 5c2.802 0 5.27 1.345 7.002 2.78a12.713 12.713 0 0 1 2.096 2.183c.253.344.465.682.618.997.14.286.284.658.284 1.04s-.145.754-.284 1.04a6.6 6.6 0 0 1-.618.997 12.712 12.712 0 0 1-2.096 2.183C17.271 17.655 14.802 19 12 19c-2.802 0-5.27-1.345-7.002-2.78a12.712 12.712 0 0 1-2.096-2.183 6.6 6.6 0 0 1-.618-.997C2.144 12.754 2 12.382 2 12s.145-.754.284-1.04c.153-.315.365-.653.618-.997A12.714 12.714 0 0 1 4.998 7.78ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                                                                        clip-rule="evenodd" />
+                                                                </svg>
+                                                            </button>
 
 
+                                                        </li>
+                                                    @endforeach
+                                                @else
+                                                    <p class="text-red-600">Data Peserta pelatihan kosong</p>
+                                                @endif
+                                            </ol>
+                                        </td>
+                                        <td class="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                                            {{ $jenis_pelatihan->pelatihan_standart_value }}</td>
+                                        <td class="flex">
+                                            <div>
+                                                {{ \Carbon\Carbon::parse($jenis_pelatihan->pelatihan_start)->locale('id')->isoFormat('dddd D MMMM YYYY') }}
+                                            </div>
+                                            <span> - </span>
+                                            <div>
+                                                {{ \Carbon\Carbon::parse($jenis_pelatihan->pelatihan_end)->locale('id')->isoFormat('dddd D MMMM YYYY') }}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
+        id="progress-modal" aria-hidden="true" tabindex="-1">
+        <div class="relative max-h-full w-full max-w-md p-4">
+            <!-- Modal content -->
+            <div class="relative rounded-lg bg-white shadow dark:bg-gray-700">
+                <button
+                    class="absolute end-2.5 top-3 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-hide="progress-modal" type="button">
+                    <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="p-4 md:p-5">
+                    <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">Detail Nilai</h3>
+                    <p class="mb-4 text-gray-500 dark:text-gray-400">
+                        Nama Peserta: <span class="font-bold text-gray-900 dark:text-white" id="modal-name"></span>
+                    </p>
+                    <ul class="list-disc pl-5 text-gray-500 dark:text-gray-400">
+                        <li>Nilai Absensi: <span class="font-bold text-gray-900 dark:text-white"
+                                id="modal-absensi"></span></li>
+                        <li>Nilai Tugas: <span class="font-bold text-gray-900 dark:text-white"
+                                id="modal-tugas"></span></li>
+                        <li>Nilai Test: <span class="font-bold text-gray-900 dark:text-white" id="modal-test"></span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
         </div>
     </div>
     @push('after-scripts')
         <script>
+            // handle detail nilai
+            document.addEventListener('DOMContentLoaded', () => {
+                const buttons = document.querySelectorAll('[data-modal-toggle="progress-modal"]');
+
+                buttons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const name = button.getAttribute('data-name');
+                        const absensi = button.getAttribute('data-absensi');
+                        const tugas = button.getAttribute('data-tugas');
+                        const test = button.getAttribute('data-test');
+
+                        document.getElementById('modal-name').textContent = name;
+                        document.getElementById('modal-absensi').textContent = absensi;
+                        document.getElementById('modal-tugas').textContent = tugas;
+                        document.getElementById('modal-test').textContent = test;
+                    });
+                });
+            });
+        </script>
+        <script>
+            if (document.getElementById("pagination-table") && typeof simpleDatatables.DataTable !== 'undefined') {
+                const dataTable = new simpleDatatables.DataTable("#pagination-table", {
+                    paging: true,
+                    perPage: 5,
+                    perPageSelect: [5, 10, 15, 20, 25],
+                    sortable: false
+                    // labels: {
+                    //     placeholder: "Cari...", // Informasi jumlah data
+                    // }
+                });
+            }
             if (document.getElementById("export-table") && typeof simpleDatatables.DataTable !== 'undefined') {
 
                 const exportCustomCSV = function(dataTable, userOptions = {}) {
